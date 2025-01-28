@@ -40,8 +40,8 @@ namespace Questionnaire
                 Role userRole = new() { Name = "User" };
                 context.Roles.AddRange(adminRole, userRole);
 
-                User adminUser = new() { Login = "Admin", Email = "", Password = GetMD5Hash("Admin"), Role = adminRole };
-                User user1 = new() { Login = "12341234", Email = "", Password = GetMD5Hash("1234"), Role = userRole };
+                User adminUser = new() { Login = "Admin", Email = "admin@gmail.com", Password = GetMD5Hash("Admin"), Role = adminRole };
+                User user1 = new() { Login = "12341234", Email = "user@gmail.com", Password = GetMD5Hash("1234"), Role = userRole };
                 context.Users.AddRange(adminUser, user1);
 
                 Survey survey1 = new() { Name = "quest 1", User = user1 };
@@ -74,7 +74,7 @@ namespace Questionnaire
             }
             using (Context context = new())
             {
-                User user2 = new() { Login = "78907890", Email = "", Password = GetMD5Hash("7890"), Role = context.Roles.Where(role => role.Name == "User").First() };
+                User user2 = new() { Login = "78907890", Email = "1234@gmail.com", Password = GetMD5Hash("7890"), Role = context.Roles.Where(role => role.Name == "User").First() };
                 context.Users.AddRange(user2);
 
                 string thisIdSurvay = "quest 1";
