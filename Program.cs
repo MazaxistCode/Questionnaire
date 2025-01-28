@@ -91,5 +91,3 @@ public class AnswerQuestion
     public int? AnswerSurveyId { get; set; }
     public AnswerSurvey AnswerSurvey { get; set; }
 }
-
-// проверка
