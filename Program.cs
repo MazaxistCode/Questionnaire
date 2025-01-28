@@ -82,3 +82,5 @@ public class AnswerQuestion
     public Answer Answer { get; set; }
     public AnswerSurvey AnswerSurvey { get; set; }
 }
+
+// проверка
