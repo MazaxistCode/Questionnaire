@@ -180,7 +180,7 @@
         private Label label5;
         private Label label6;
         private Label label7;
-        private TextBox textBox1;
+        public TextBox textBox1;
         private TextBox textBox2;
         private Button button1;
         private Label label8;

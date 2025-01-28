@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Questionnaire;
 
 namespace Questionnaire
 {
@@ -42,10 +43,7 @@ public class User
     public string Login { get; set; }
     public string Password { get; set; }
     public string Email { get; set; }
-    public int? RoleId { get; set; }
     public Role Role { get; set; }
-    public List<Survey> Surveys { get; set; }
-    public List<AnswerSurvey> AnswerSurveys { get; set; }
 }
 public class Role
 {
@@ -56,42 +54,31 @@ public class Survey
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public int? UserId { get; set; }
     public User User { get; set; }
-    public List<Question> Questions { get; set; }
 }
 public class Question
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public int? SurveyId { get; set; }
     public Survey Survey { get; set; }
-    public List<Answer> Answers { get; set; }
 }
 public class Answer
 {
     public int Id { get; set; }
     public string Name { get; set; }
     public bool IsTrue { get; set; } = false;
-    public int? QuestionId { get; set; }
     public Question Question { get; set; }
 }
 public class AnswerSurvey
 {
     public int Id { get; set; }
-    public int? SurveyId { get; set; }
     public Survey Survey { get; set; }
-    public int? UserId { get; set; }
     public User User { get; set; }
-    public List<AnswerQuestion> answerQuestions { get; set; }
 }
 public class AnswerQuestion
 {
     public int Id { get; set; }
-    public int? QuestionId { get; set; }
     public Question Question { get; set; }
-    public int? AnswerId { get; set; }
     public Answer Answer { get; set; }
-    public int? AnswerSurveyId { get; set; }
     public AnswerSurvey AnswerSurvey { get; set; }
 }

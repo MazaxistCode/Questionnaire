@@ -10,7 +10,6 @@ namespace Questionnaire
         {
             InitializeComponent();
         }
-
         // експеримент с фреймами, а именно с передачей данных, передавал, как всю форму, так и как тут... текст.
 
         //public StartForm(string text)
@@ -80,12 +79,12 @@ namespace Questionnaire
 
                 string thisIdSurvay = "quest 1";
                 Survey survayAnswer = context.Surveies.Where(survay => survay.Name == thisIdSurvay).First();
-                List<Question> questions = context.Questions.Where(quest => quest.SurveyId == survayAnswer.Id).ToList();
+                List<Question> questions = context.Questions.Where(quest => quest.Survey.Id == survayAnswer.Id).ToList();
                 List<string> usersAnswers = new() { "T", "T", "NS" };
                 List<Answer> answers = new();
                 for (int i = 0; i < questions.Count; i++)
                 {
-                    answers.Add(context.Answers.Where(answer => answer.Name == usersAnswers[i] && answer.QuestionId == questions[i].Id).First());
+                    answers.Add(context.Answers.Where(answer => answer.Name == usersAnswers[i] && answer.Question.Id == questions[i].Id).First());
                 }
 
                 AnswerSurvey answerSurvey = new() { Survey = survayAnswer, User = user2 };
@@ -107,8 +106,7 @@ namespace Questionnaire
                         user.Id + "   " +
                         user.Login + "   " +
                         user.Password + "   " +
-                        user.Email + "   " +
-                        user.RoleId + "   "
+                        user.Email + "   "
                         + '\n';
                 }
                 label1.Text = text1;
@@ -126,8 +124,7 @@ namespace Questionnaire
                 {
                     text1 +=
                         user.Id + "   " +
-                        user.Name + "   " +
-                        user.UserId + "   "
+                        user.Name + "   "
                         + "\n";
                 }
                 label3.Text = text1;
@@ -136,8 +133,7 @@ namespace Questionnaire
                 {
                     text1 +=
                         user.Id + "   " +
-                        user.Name + "   " +
-                        user.SurveyId + "   "
+                        user.Name + "   "
                         + "\n";
                 }
                 label4.Text = text1;
@@ -147,7 +143,6 @@ namespace Questionnaire
                     text1 +=
                         user.Id + "   " +
                         user.Name + "   " +
-                        user.QuestionId + "   " +
                         user.IsTrue + "   "
                         + "\n";
                 }
@@ -156,9 +151,7 @@ namespace Questionnaire
                 foreach (var user in context.AnswerSurveies)
                 {
                     text1 +=
-                        user.Id + "   " +
-                        user.UserId + "   " +
-                        user.SurveyId + "   "
+                        user.Id + "   "
                         + "\n";
                 }
                 label6.Text = text1;
@@ -167,8 +160,6 @@ namespace Questionnaire
                 {
                     text1 +=
                         user.Id + "   " +
-                        user.QuestionId + "   " +
-                        user.AnswerId + "   " +
                         user.AnswerSurvey.Id + "   "
                         + "\n";
                 }
@@ -224,7 +215,6 @@ namespace Questionnaire
                     }
                     else
                     {
-
                         Role role = context.Roles.Where(role => role.Name == "User").First();
                         User newUser = new() { Login = textBox1.Text, Password = GetMD5Hash(textBox2.Text), Role = role, Email = "" };
                         context.Users.Add(newUser);
@@ -236,8 +226,7 @@ namespace Questionnaire
                                 user.Id + "   " +
                                 user.Login + "   " +
                                 user.Password + "   " +
-                                user.Email + "   " +
-                                user.RoleId + "   "
+                                user.Email + "   "
                                 + '\n';
                         }
                         label1.Text = text;
