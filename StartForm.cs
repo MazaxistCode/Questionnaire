@@ -106,7 +106,8 @@ namespace Questionnaire
                         user.Id + "   " +
                         user.Login + "   " +
                         user.Password + "   " +
-                        user.Email + "   "
+                        user.Email + "   " +
+                        user.Role.Name
                         + '\n';
                 }
                 label1.Text = text1;
@@ -124,7 +125,9 @@ namespace Questionnaire
                 {
                     text1 +=
                         user.Id + "   " +
-                        user.Name + "   "
+                        user.Name + "   " +
+                        user.User.Id + "   " +
+                        user.User.Login
                         + "\n";
                 }
                 label3.Text = text1;
@@ -133,7 +136,9 @@ namespace Questionnaire
                 {
                     text1 +=
                         user.Id + "   " +
-                        user.Name + "   "
+                        user.Name + "   " +
+                        user.Survey.Id + "   " +
+                        user.Survey.Name + "   "
                         + "\n";
                 }
                 label4.Text = text1;
