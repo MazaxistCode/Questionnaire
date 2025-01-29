@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Questionnaire;
+using System.Net.Mail;
+using System.Net;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Windows.Forms;
 
 namespace Questionnaire
 {
@@ -90,4 +94,33 @@ public class AnswerQuestion
     public Answer Answer { get; set; }
     public int? AnswerSurveyId { get; set; }
     public AnswerSurvey AnswerSurvey { get; set; }
+}
+public static class Email
+{
+    public static void SendMessageOnEmail(string userEmail, int code)
+    {
+        try
+        {
+            MailAddress from = new("danil_loginov_07@mail.ru", $"Questionnaire");
+            MailAddress to = new(userEmail);
+            MailMessage myMail = new(from, to)
+            {
+                Subject = "Подтверждение почты.",
+                SubjectEncoding = System.Text.Encoding.UTF8,
+                Body = $"{code}",
+                BodyEncoding = System.Text.Encoding.UTF8,
+                IsBodyHtml = false
+            };
+            SmtpClient mySmtpClient = new("smtp.mail.ru", 587)
+            {
+                EnableSsl = true,
+                Credentials = new NetworkCredential("danil_loginov_07@mail.ru", "y9Awk12Gcd8bdPpikg0J")
+            };
+            mySmtpClient.Send(myMail);
+        }
+        catch (Exception)
+        {
+            MessageBox.Show("ошибка отправки");
+        }
+    }
 }
