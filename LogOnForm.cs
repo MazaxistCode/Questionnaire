@@ -46,27 +46,32 @@ namespace Questionnaire
                     string[] emails = ["gmail.com", "mail.ru", "yandex.ru", "bk.ru"];
                     if (loginBox.Text.Contains('@') && emails.Contains(loginBox.Text.Split('@')[1]))
                     {
-                        Random rand = new();
-                        int code = rand.Next(1784736, 9897435) - 2767;
-                        Email.SendMessageOnEmail(loginBox.Text, code);
-                        EnterCodeForm form = new();
-                        Visible = false;
-                        form.Location = Location;
-                        System.Timers.Timer timer = new System.Timers.Timer(60000);
-                        form.ShowDialog();
-                        Location = form.Location;
-                        string enterCode = form.codeBox.Text;
-                        if ($"{code}" == enterCode)
+                        if (passBox.Text == passBox2.Text)
                         {
-                            Role role = context.Roles.Where(role => role.Name == "User").First();
-                            User newUser = new() { Login = loginBox.Text, Password = GetMD5Hash(passBox.Text), Role = role, Email = loginBox.Text };
-                            context.Users.Add(newUser);
-                            context.SaveChanges();
-                            MessageBox.Show("вы зарегистрированы.");
-                            Close();
+                            Random rand = new();
+                            int code = rand.Next(1784736, 9897435) - 2767;
+                            Email.SendMessageOnEmail(loginBox.Text, code);
+                            EnterCodeForm form = new();
+                            Visible = false;
+                            form.Location = Location;
+                            System.Timers.Timer timer = new System.Timers.Timer(60000);
+                            form.ShowDialog();
+                            Location = form.Location;
+                            string enterCode = form.codeBox.Text;
+                            if ($"{code}" == enterCode)
+                            {
+                                Role role = context.Roles.Where(role => role.Name == "User").First();
+                                User newUser = new() { Login = loginBox.Text, Password = GetMD5Hash(passBox.Text), Role = role, Email = loginBox.Text };
+                                context.Users.Add(newUser);
+                                context.SaveChanges();
+                                MessageBox.Show("вы зарегистрированы.");
+                                Close();
+                            }
+                            else
+                                Visible = true;
                         }
                         else
-                            Visible = true;
+                            MessageBox.Show("пароль повторён неверно");
                     }
                     else
                         MessageBox.Show("для регистрации впишите почту в поле для логина.");
