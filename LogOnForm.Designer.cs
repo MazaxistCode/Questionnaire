@@ -33,6 +33,8 @@
             OnButton = new Button();
             passBox = new TextBox();
             loginBox = new TextBox();
+            passBox2 = new TextBox();
+            passLabel2 = new Label();
             SuspendLayout();
             // 
             // passLabel
@@ -55,7 +57,7 @@
             // 
             // OnButton
             // 
-            OnButton.Location = new Point(155, 248);
+            OnButton.Location = new Point(155, 277);
             OnButton.Name = "OnButton";
             OnButton.Size = new Size(258, 23);
             OnButton.TabIndex = 25;
@@ -78,12 +80,31 @@
             loginBox.Size = new Size(258, 23);
             loginBox.TabIndex = 23;
             // 
+            // passBox2
+            // 
+            passBox2.Location = new Point(155, 248);
+            passBox2.Name = "passBox2";
+            passBox2.PasswordChar = '*';
+            passBox2.Size = new Size(258, 23);
+            passBox2.TabIndex = 28;
+            // 
+            // passLabel2
+            // 
+            passLabel2.AutoSize = true;
+            passLabel2.Location = new Point(14, 251);
+            passLabel2.Name = "passLabel2";
+            passLabel2.Size = new Size(135, 15);
+            passLabel2.TabIndex = 29;
+            passLabel2.Text = "подтверждение пароля";
+            // 
             // LogOnForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(484, 461);
+            Controls.Add(passLabel2);
+            Controls.Add(passBox2);
             Controls.Add(passLabel);
             Controls.Add(loginLabel);
             Controls.Add(OnButton);
@@ -105,5 +126,7 @@
         private Button OnButton;
         private TextBox passBox;
         public TextBox loginBox;
+        private TextBox passBox2;
+        private Label passLabel2;
     }
 }
