@@ -61,7 +61,7 @@
             OnButton.Name = "OnButton";
             OnButton.Size = new Size(258, 23);
             OnButton.TabIndex = 25;
-            OnButton.Text = "Регистрация / авторизация";
+            OnButton.Text = "Регистрация";
             OnButton.UseVisualStyleBackColor = true;
             OnButton.Click += OnButton_Click;
             // 

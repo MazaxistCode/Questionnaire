@@ -18,7 +18,7 @@ namespace Questionnaire
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Task.Run(() => { Application.Run(new Test()); });
+            //Task.Run(() => { Application.Run(new Test()); });
             Application.Run(new LogInForm());
         }
     }
