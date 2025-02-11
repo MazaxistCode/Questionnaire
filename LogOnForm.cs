@@ -13,44 +13,32 @@ namespace Questionnaire
 {
     public partial class LogOnForm : Form
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool isFinish { get; private set; }
         public LogOnForm()
         {
             InitializeComponent();
-        }
-        private static string GetMD5Hash(string text)
-        {
-            using var hashAlg = MD5.Create();
-            byte[] hash = hashAlg.ComputeHash(Encoding.UTF8.GetBytes(text));
-            var builder = new StringBuilder(hash.Length * 2);
-            for (int i = 0; i < hash.Length; i++)
-            {
-                builder.Append(hash[i].ToString("X2"));
-            }
-            return builder.ToString();
-        }
-        private void LogOnForm_Load(object sender, EventArgs e)
-        {
-
+            isFinish = false;
         }
         private void OnButton_Click(object sender, EventArgs e)
         {
-            if (loginBox.Text == string.Empty || passBox.Text == string.Empty)
-                MessageBox.Show("Впишите логин и пароль.");
+            if (LoginBox.Text == string.Empty || PassBox.Text == string.Empty || PassBox2.Text == string.Empty)
+                MessageBox.Show("зполните все поля");
             else
             {
                 Context context = new();
-                if (context.Users.Where(user => user.Login == loginBox.Text || user.Email == loginBox.Text).Any())
+                if (context.Users.Where(user => user.Login == LoginBox.Text || user.Email == LoginBox.Text).Any())
                     MessageBox.Show("пользователь с таким логином уже существует.");
                 else
                 {
                     string[] emails = ["gmail.com", "mail.ru", "yandex.ru", "bk.ru"];
-                    if (loginBox.Text.Contains('@') && emails.Contains(loginBox.Text.Split('@')[1]))
+                    if (LoginBox.Text.Contains('@') && emails.Contains(LoginBox.Text.Split('@')[1]))
                     {
-                        if (passBox.Text == passBox2.Text)
+                        if (PassBox.Text == PassBox2.Text)
                         {
                             Random rand = new();
                             int code = rand.Next(1784736, 9897435) - 2767;
-                            Email.SendMessageOnEmail(loginBox.Text, code);
+                            Email.SendMessageOnEmail(LoginBox.Text, code);
                             EnterCodeForm form = new();
                             Visible = false;
                             form.Location = Location;
@@ -61,9 +49,10 @@ namespace Questionnaire
                             if ($"{code}" == enterCode)
                             {
                                 Role role = context.Roles.Where(role => role.Name == "User").First();
-                                User newUser = new() { Login = loginBox.Text, Password = GetMD5Hash(passBox.Text), Role = role, Email = loginBox.Text };
+                                User newUser = new() { Login = LoginBox.Text, Password = PassBox.Text.GetHash(), Role = role, Email = LoginBox.Text };
                                 context.Users.Add(newUser);
                                 context.SaveChanges();
+                                isFinish = true;
                                 MessageBox.Show("вы зарегистрированы.");
                                 Close();
                             }
@@ -77,6 +66,11 @@ namespace Questionnaire
                         MessageBox.Show("для регистрации впишите почту в поле для логина.");
                 }
             }
+        }
+
+        private void InButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

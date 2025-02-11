@@ -18,8 +18,8 @@ namespace Questionnaire
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            //Task.Run(() => { Application.Run(new Test()); });
-            Application.Run(new LogInForm());
+            Task.Run(() => { Application.Run(new Test()); });
+            Application.Run(new LogInForm(true));
         }
     }
 }
@@ -48,6 +48,7 @@ public class User
     public string Login { get; set; }
     public string Password { get; set; }
     public string Email { get; set; }
+    public PictureBoxSizeMode SizeMode { get; set; } = PictureBoxSizeMode.StretchImage;
     public int? RoleId { get; set; }
     public Role Role { get; set; }
 }
