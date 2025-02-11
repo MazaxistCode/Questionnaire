@@ -28,105 +28,167 @@
         /// </summary>
         private void InitializeComponent()
         {
-            passLabel = new Label();
-            loginLabel = new Label();
+            panel1 = new Panel();
+            PassLabel2 = new Label();
+            PassBox2 = new TextBox();
+            LoginLabel = new Label();
+            InButton = new Button();
+            LoginBox = new TextBox();
             OnButton = new Button();
-            passBox = new TextBox();
-            loginBox = new TextBox();
-            passBox2 = new TextBox();
-            passLabel2 = new Label();
+            PassLabel = new Label();
+            PassBox = new TextBox();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // passLabel
+            // panel1
             // 
-            passLabel.AutoSize = true;
-            passLabel.Location = new Point(102, 222);
-            passLabel.Name = "passLabel";
-            passLabel.Size = new Size(47, 15);
-            passLabel.TabIndex = 27;
-            passLabel.Text = "пароль";
+            panel1.BackColor = Color.DodgerBlue;
+            panel1.Controls.Add(PassLabel2);
+            panel1.Controls.Add(PassBox2);
+            panel1.Controls.Add(LoginLabel);
+            panel1.Controls.Add(InButton);
+            panel1.Controls.Add(LoginBox);
+            panel1.Controls.Add(OnButton);
+            panel1.Controls.Add(PassLabel);
+            panel1.Controls.Add(PassBox);
+            panel1.Location = new Point(12, 12);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(360, 212);
+            panel1.TabIndex = 30;
             // 
-            // loginLabel
+            // PassLabel2
             // 
-            loginLabel.AutoSize = true;
-            loginLabel.Location = new Point(72, 193);
-            loginLabel.Name = "loginLabel";
-            loginLabel.Size = new Size(77, 15);
-            loginLabel.TabIndex = 26;
-            loginLabel.Text = "логин/почта";
+            PassLabel2.Anchor = AnchorStyles.None;
+            PassLabel2.BackColor = Color.DodgerBlue;
+            PassLabel2.Font = new Font("Times New Roman", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            PassLabel2.ForeColor = Color.White;
+            PassLabel2.Location = new Point(30, 86);
+            PassLabel2.Name = "PassLabel2";
+            PassLabel2.Size = new Size(110, 21);
+            PassLabel2.TabIndex = 38;
+            PassLabel2.Text = "ПАРОЛЬ";
+            PassLabel2.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // PassBox2
+            // 
+            PassBox2.Anchor = AnchorStyles.None;
+            PassBox2.BackColor = Color.FromArgb(192, 255, 255);
+            PassBox2.BorderStyle = BorderStyle.FixedSingle;
+            PassBox2.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
+            PassBox2.Location = new Point(164, 87);
+            PassBox2.Name = "PassBox2";
+            PassBox2.PasswordChar = '*';
+            PassBox2.Size = new Size(157, 21);
+            PassBox2.TabIndex = 37;
+            // 
+            // LoginLabel
+            // 
+            LoginLabel.BackColor = Color.DodgerBlue;
+            LoginLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
+            LoginLabel.ForeColor = Color.White;
+            LoginLabel.Location = new Point(30, 34);
+            LoginLabel.Name = "LoginLabel";
+            LoginLabel.Size = new Size(110, 21);
+            LoginLabel.TabIndex = 34;
+            LoginLabel.Text = "ЛОГИН / ПОЧТА";
+            LoginLabel.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // InButton
+            // 
+            InButton.Anchor = AnchorStyles.None;
+            InButton.BackColor = Color.DeepSkyBlue;
+            InButton.FlatAppearance.BorderColor = Color.White;
+            InButton.FlatAppearance.BorderSize = 0;
+            InButton.FlatStyle = FlatStyle.Flat;
+            InButton.Font = new Font("Times New Roman", 9.25F, FontStyle.Bold);
+            InButton.ForeColor = Color.White;
+            InButton.Location = new Point(135, 164);
+            InButton.Name = "InButton";
+            InButton.Size = new Size(91, 25);
+            InButton.TabIndex = 36;
+            InButton.Text = "Авторизация";
+            InButton.UseVisualStyleBackColor = false;
+            InButton.Click += InButton_Click;
+            // 
+            // LoginBox
+            // 
+            LoginBox.Anchor = AnchorStyles.None;
+            LoginBox.BackColor = Color.FromArgb(192, 255, 255);
+            LoginBox.BorderStyle = BorderStyle.FixedSingle;
+            LoginBox.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
+            LoginBox.Location = new Point(164, 33);
+            LoginBox.Name = "LoginBox";
+            LoginBox.Size = new Size(157, 21);
+            LoginBox.TabIndex = 31;
             // 
             // OnButton
             // 
-            OnButton.Location = new Point(155, 277);
+            OnButton.Anchor = AnchorStyles.None;
+            OnButton.BackColor = Color.DeepSkyBlue;
+            OnButton.FlatAppearance.BorderColor = Color.White;
+            OnButton.FlatAppearance.BorderSize = 0;
+            OnButton.FlatStyle = FlatStyle.Flat;
+            OnButton.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            OnButton.ForeColor = Color.White;
+            OnButton.Location = new Point(118, 129);
             OnButton.Name = "OnButton";
-            OnButton.Size = new Size(258, 23);
-            OnButton.TabIndex = 25;
+            OnButton.Size = new Size(125, 29);
+            OnButton.TabIndex = 33;
             OnButton.Text = "Регистрация";
-            OnButton.UseVisualStyleBackColor = true;
+            OnButton.UseVisualStyleBackColor = false;
             OnButton.Click += OnButton_Click;
             // 
-            // passBox
+            // PassLabel
             // 
-            passBox.Location = new Point(155, 219);
-            passBox.Name = "passBox";
-            passBox.PasswordChar = '*';
-            passBox.Size = new Size(258, 23);
-            passBox.TabIndex = 24;
+            PassLabel.Anchor = AnchorStyles.None;
+            PassLabel.BackColor = Color.DodgerBlue;
+            PassLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            PassLabel.ForeColor = Color.White;
+            PassLabel.Location = new Point(30, 59);
+            PassLabel.Name = "PassLabel";
+            PassLabel.Size = new Size(110, 21);
+            PassLabel.TabIndex = 35;
+            PassLabel.Text = "ПАРОЛЬ";
+            PassLabel.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // loginBox
+            // PassBox
             // 
-            loginBox.Location = new Point(155, 190);
-            loginBox.Name = "loginBox";
-            loginBox.Size = new Size(258, 23);
-            loginBox.TabIndex = 23;
-            // 
-            // passBox2
-            // 
-            passBox2.Location = new Point(155, 248);
-            passBox2.Name = "passBox2";
-            passBox2.PasswordChar = '*';
-            passBox2.Size = new Size(258, 23);
-            passBox2.TabIndex = 28;
-            // 
-            // passLabel2
-            // 
-            passLabel2.AutoSize = true;
-            passLabel2.Location = new Point(14, 251);
-            passLabel2.Name = "passLabel2";
-            passLabel2.Size = new Size(135, 15);
-            passLabel2.TabIndex = 29;
-            passLabel2.Text = "подтверждение пароля";
+            PassBox.Anchor = AnchorStyles.None;
+            PassBox.BackColor = Color.FromArgb(192, 255, 255);
+            PassBox.BorderStyle = BorderStyle.FixedSingle;
+            PassBox.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
+            PassBox.Location = new Point(164, 60);
+            PassBox.Name = "PassBox";
+            PassBox.PasswordChar = '*';
+            PassBox.Size = new Size(157, 21);
+            PassBox.TabIndex = 32;
             // 
             // LogOnForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(484, 461);
-            Controls.Add(passLabel2);
-            Controls.Add(passBox2);
-            Controls.Add(passLabel);
-            Controls.Add(loginLabel);
-            Controls.Add(OnButton);
-            Controls.Add(passBox);
-            Controls.Add(loginBox);
+            BackColor = Color.RoyalBlue;
+            ClientSize = new Size(384, 236);
+            Controls.Add(panel1);
             MaximizeBox = false;
             Name = "LogOnForm";
             StartPosition = FormStartPosition.Manual;
             Text = "LogOnForm";
-            Load += LogOnForm_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Label passLabel;
-        private Label loginLabel;
+        private Panel panel1;
+        private Button InButton;
+        public TextBox LoginBox;
+        private Label PassLabel;
+        private TextBox PassBox;
+        private Label LoginLabel;
         private Button OnButton;
-        private TextBox passBox;
-        public TextBox loginBox;
-        private TextBox passBox2;
-        private Label passLabel2;
+        private Label PassLabel2;
+        private TextBox PassBox2;
     }
 }

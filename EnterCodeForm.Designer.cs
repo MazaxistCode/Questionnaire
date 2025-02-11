@@ -32,72 +32,102 @@
             codeBox = new TextBox();
             codeButton = new Button();
             manualLabel = new Label();
-            label1 = new Label();
+            panel1 = new Panel();
+            button1 = new Button();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // codeLabel
             // 
-            codeLabel.AutoSize = true;
-            codeLabel.Location = new Point(80, 189);
+            codeLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
+            codeLabel.ForeColor = Color.White;
+            codeLabel.Location = new Point(94, 81);
             codeLabel.Name = "codeLabel";
-            codeLabel.Size = new Size(26, 15);
+            codeLabel.Size = new Size(36, 23);
             codeLabel.TabIndex = 28;
-            codeLabel.Text = "код";
+            codeLabel.Text = "КОД";
+            codeLabel.TextAlign = ContentAlignment.MiddleRight;
             // 
             // codeBox
             // 
-            codeBox.Location = new Point(112, 186);
+            codeBox.BackColor = Color.FromArgb(192, 255, 255);
+            codeBox.BorderStyle = BorderStyle.FixedSingle;
+            codeBox.Location = new Point(147, 81);
             codeBox.Name = "codeBox";
-            codeBox.Size = new Size(258, 23);
+            codeBox.Size = new Size(117, 23);
             codeBox.TabIndex = 27;
             // 
             // codeButton
             // 
-            codeButton.Location = new Point(112, 215);
+            codeButton.BackColor = Color.DeepSkyBlue;
+            codeButton.FlatAppearance.BorderSize = 0;
+            codeButton.FlatStyle = FlatStyle.Flat;
+            codeButton.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+            codeButton.ForeColor = Color.White;
+            codeButton.Location = new Point(94, 124);
             codeButton.Name = "codeButton";
-            codeButton.Size = new Size(258, 23);
+            codeButton.Size = new Size(170, 34);
             codeButton.TabIndex = 26;
-            codeButton.Text = "ввести код с почты";
-            codeButton.UseVisualStyleBackColor = true;
+            codeButton.Text = "Ввести код с почты";
+            codeButton.UseVisualStyleBackColor = false;
             codeButton.Click += codeButton_Click;
             // 
             // manualLabel
             // 
             manualLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             manualLabel.FlatStyle = FlatStyle.Flat;
-            manualLabel.Location = new Point(0, 20);
+            manualLabel.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            manualLabel.ForeColor = Color.White;
+            manualLabel.Location = new Point(0, 17);
             manualLabel.Name = "manualLabel";
-            manualLabel.Size = new Size(484, 45);
+            manualLabel.Size = new Size(360, 49);
             manualLabel.TabIndex = 29;
             manualLabel.Text = "Вам было отправлен код на указанную почту,\r\nвведите его в предназначенное для кода поле,\r\nпосле чело нажмите на кнопку.";
             manualLabel.TextAlign = ContentAlignment.TopCenter;
             // 
-            // label1
+            // panel1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(189, 241);
-            label1.Name = "label1";
-            label1.Size = new Size(98, 15);
-            label1.TabIndex = 30;
-            label1.Text = "Ввёл не ту почту";
-            label1.Click += label1_Click;
+            panel1.Anchor = AnchorStyles.None;
+            panel1.BackColor = Color.DodgerBlue;
+            panel1.Controls.Add(button1);
+            panel1.Controls.Add(codeButton);
+            panel1.Controls.Add(codeBox);
+            panel1.Controls.Add(manualLabel);
+            panel1.Controls.Add(codeLabel);
+            panel1.Location = new Point(12, 12);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(360, 212);
+            panel1.TabIndex = 31;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.DeepSkyBlue;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Times New Roman", 9.25F, FontStyle.Bold);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(105, 164);
+            button1.Name = "button1";
+            button1.Size = new Size(141, 23);
+            button1.TabIndex = 30;
+            button1.Text = "Ввёл не ту почту";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // EnterCodeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(484, 461);
-            Controls.Add(label1);
-            Controls.Add(manualLabel);
-            Controls.Add(codeLabel);
-            Controls.Add(codeBox);
-            Controls.Add(codeButton);
+            BackColor = Color.RoyalBlue;
+            ClientSize = new Size(384, 236);
+            Controls.Add(panel1);
             MaximizeBox = false;
             Name = "EnterCodeForm";
             StartPosition = FormStartPosition.Manual;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -106,6 +136,7 @@
         public TextBox codeBox;
         internal Button codeButton;
         private Label manualLabel;
-        private Label label1;
+        private Panel panel1;
+        internal Button button1;
     }
 }

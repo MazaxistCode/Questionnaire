@@ -125,7 +125,7 @@
             Controls.Add(button1);
             Controls.Add(label1);
             Name = "Test";
-            StartPosition = FormStartPosition.Manual;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Test";
             TopMost = true;
             ResumeLayout(false);
