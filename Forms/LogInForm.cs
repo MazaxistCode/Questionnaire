@@ -56,7 +56,8 @@ namespace Questionnaire
 
                     User adminUser = new() { Login = "Admin", Email = "admin@gmail.com", Password = "Admin".GetHash(), Role = adminRole };
                     User user1 = new() { Login = "12341234", Email = "user@gmail.com", Password = "1234".GetHash(), Role = userRole };
-                    context.Users.AddRange(adminUser, user1);
+                    User userqgc = new() { Login = "qgc", Email = "qgc.cor@bk.ru", Password = "qgc".GetHash(), Role = userRole };
+                    context.Users.AddRange(adminUser, user1, userqgc);
                     context.SaveChanges();
 
                     Survey survey1 = new() { Name = "quest 1", User = user1 };
