@@ -46,12 +46,12 @@ namespace Questionnaire
         {
             AccountForm form = new(UserEmail);
             Visible = false;
-            form.Location = Location;
+            form.Location = new() { X = Location.X + 87, Y = Location.Y + 75 };
             form.ShowDialog();
             if (form.AvatarPictureBox.Image != null)
                 form.AvatarPictureBox.Image.Dispose();
             form.AvatarPictureBox.Image = null;
-            Location = form.Location;
+            Location = new() { X = form.Location.X - 87, Y = form.Location.Y - 75 };
             Visible = true;
         }
     }

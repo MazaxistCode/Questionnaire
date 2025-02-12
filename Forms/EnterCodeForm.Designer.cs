@@ -106,7 +106,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Times New Roman", 9.25F, FontStyle.Bold);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(105, 164);
+            button1.Location = new Point(109, 164);
             button1.Name = "button1";
             button1.Size = new Size(141, 23);
             button1.TabIndex = 30;
