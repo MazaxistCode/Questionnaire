@@ -62,9 +62,9 @@
             PassLabel2.BackColor = Color.DodgerBlue;
             PassLabel2.Font = new Font("Times New Roman", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             PassLabel2.ForeColor = Color.White;
-            PassLabel2.Location = new Point(30, 86);
+            PassLabel2.Location = new Point(65, 85);
             PassLabel2.Name = "PassLabel2";
-            PassLabel2.Size = new Size(110, 21);
+            PassLabel2.Size = new Size(60, 21);
             PassLabel2.TabIndex = 38;
             PassLabel2.Text = "ПАРОЛЬ";
             PassLabel2.TextAlign = ContentAlignment.MiddleRight;
@@ -75,7 +75,7 @@
             PassBox2.BackColor = Color.FromArgb(192, 255, 255);
             PassBox2.BorderStyle = BorderStyle.FixedSingle;
             PassBox2.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
-            PassBox2.Location = new Point(164, 87);
+            PassBox2.Location = new Point(149, 86);
             PassBox2.Name = "PassBox2";
             PassBox2.PasswordChar = '*';
             PassBox2.Size = new Size(157, 21);
@@ -86,11 +86,11 @@
             LoginLabel.BackColor = Color.DodgerBlue;
             LoginLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
             LoginLabel.ForeColor = Color.White;
-            LoginLabel.Location = new Point(30, 34);
+            LoginLabel.Location = new Point(65, 33);
             LoginLabel.Name = "LoginLabel";
-            LoginLabel.Size = new Size(110, 21);
+            LoginLabel.Size = new Size(60, 21);
             LoginLabel.TabIndex = 34;
-            LoginLabel.Text = "ЛОГИН / ПОЧТА";
+            LoginLabel.Text = "ПОЧТА";
             LoginLabel.TextAlign = ContentAlignment.MiddleRight;
             // 
             // InButton
@@ -116,7 +116,7 @@
             LoginBox.BackColor = Color.FromArgb(192, 255, 255);
             LoginBox.BorderStyle = BorderStyle.FixedSingle;
             LoginBox.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
-            LoginBox.Location = new Point(164, 33);
+            LoginBox.Location = new Point(149, 32);
             LoginBox.Name = "LoginBox";
             LoginBox.Size = new Size(157, 21);
             LoginBox.TabIndex = 31;
@@ -144,9 +144,9 @@
             PassLabel.BackColor = Color.DodgerBlue;
             PassLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             PassLabel.ForeColor = Color.White;
-            PassLabel.Location = new Point(30, 59);
+            PassLabel.Location = new Point(65, 58);
             PassLabel.Name = "PassLabel";
-            PassLabel.Size = new Size(110, 21);
+            PassLabel.Size = new Size(60, 21);
             PassLabel.TabIndex = 35;
             PassLabel.Text = "ПАРОЛЬ";
             PassLabel.TextAlign = ContentAlignment.MiddleRight;
@@ -157,7 +157,7 @@
             PassBox.BackColor = Color.FromArgb(192, 255, 255);
             PassBox.BorderStyle = BorderStyle.FixedSingle;
             PassBox.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
-            PassBox.Location = new Point(164, 60);
+            PassBox.Location = new Point(149, 59);
             PassBox.Name = "PassBox";
             PassBox.PasswordChar = '*';
             PassBox.Size = new Size(157, 21);

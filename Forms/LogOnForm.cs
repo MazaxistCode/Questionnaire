@@ -53,8 +53,8 @@ namespace Questionnaire
                                 User newUser = new() { Login = LoginBox.Text, Password = PassBox.Text.GetHash(), Role = role, Email = LoginBox.Text };
                                 context.Users.Add(newUser);
                                 context.SaveChanges();
-                                File.Copy(@"C:\Users\Admin\source\repos\Questionnaire\Avatars\basicAvatar.png",
-                                    @$"C:\Users\Admin\source\repos\Questionnaire\Avatars\{LoginBox.Text.GetHash()}.png", true);
+                                File.Copy(@$"{AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug\\net9.0-windows", "Avatars")}basicAvatar.png",
+                                    @$"{AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug\\net9.0-windows", "Avatars") + LoginBox.Text.GetHash()}.png", true);
                                 isFinish = true;
                                 MessageBox.Show("вы зарегистрированы.");
                                 Close();

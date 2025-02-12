@@ -137,6 +137,6 @@
         internal Button codeButton;
         private Label manualLabel;
         private Panel panel1;
-        internal Button button1;
+        public Button button1;
     }
 }
