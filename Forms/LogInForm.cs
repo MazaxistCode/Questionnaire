@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 
 using Questionnaire.DB;
+using Questionnaire.Forms;
 
 namespace Questionnaire
 {
@@ -26,7 +27,8 @@ namespace Questionnaire
             StartDB();
             if (isTest)
             {
-                UserMenuForm form = new(UserEmail);
+                //UserMenuForm form = new(UserEmail);
+                CreateSurveyForm form = new(UserEmail);
                 Visible = false;
                 form.ShowDialog();
                 Close();
