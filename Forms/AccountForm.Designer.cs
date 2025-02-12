@@ -132,7 +132,7 @@
             groupBox2.Controls.Add(PassBox2);
             groupBox2.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
             groupBox2.ForeColor = Color.White;
-            groupBox2.Location = new Point(276, 122);
+            groupBox2.Location = new Point(276, 112);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(284, 94);
             groupBox2.TabIndex = 34;
@@ -222,6 +222,8 @@
             BackColor = Color.RoyalBlue;
             ClientSize = new Size(609, 311);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "AccountForm";
             StartPosition = FormStartPosition.Manual;
             Text = "AccountForm";

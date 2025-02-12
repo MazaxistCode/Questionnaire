@@ -35,7 +35,7 @@
             AccountButton = new Button();
             button3 = new Button();
             button2 = new Button();
-            button1 = new Button();
+            CreateButton = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -58,7 +58,7 @@
             panel1.Controls.Add(AccountButton);
             panel1.Controls.Add(button3);
             panel1.Controls.Add(button2);
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(CreateButton);
             panel1.Controls.Add(SurveiesListBox);
             panel1.Location = new Point(12, 12);
             panel1.Name = "panel1";
@@ -132,29 +132,32 @@
             button2.Text = "Открыть опрос";
             button2.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // CreateButton
             // 
-            button1.BackColor = Color.DeepSkyBlue;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(484, 131);
-            button1.Name = "button1";
-            button1.Size = new Size(232, 81);
-            button1.TabIndex = 1;
-            button1.Text = "Создать опрос";
-            button1.UseVisualStyleBackColor = false;
+            CreateButton.BackColor = Color.DeepSkyBlue;
+            CreateButton.FlatAppearance.BorderSize = 0;
+            CreateButton.FlatStyle = FlatStyle.Flat;
+            CreateButton.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold);
+            CreateButton.ForeColor = Color.White;
+            CreateButton.Location = new Point(484, 131);
+            CreateButton.Name = "CreateButton";
+            CreateButton.Size = new Size(232, 81);
+            CreateButton.TabIndex = 1;
+            CreateButton.Text = "Создать опрос";
+            CreateButton.UseVisualStyleBackColor = false;
+            CreateButton.Click += CreateButton_Click;
             // 
-            // UserMenuForm
+            // ListSurveyForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.RoyalBlue;
             ClientSize = new Size(784, 461);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
-            Name = "UserMenuForm";
+            Name = "ListSurveyForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "UserMenu";
             Load += UserMenu_Load;
@@ -169,7 +172,7 @@
         private Panel panel1;
         private Button button3;
         private Button button2;
-        private Button button1;
+        private Button CreateButton;
         private Button AccountButton;
         private TextBox SearchBox;
         private Button SearchButton;

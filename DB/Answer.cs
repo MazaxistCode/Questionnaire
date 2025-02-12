@@ -10,8 +10,11 @@ namespace Questionnaire.DB
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int Ball { get; set; }
         public bool IsTrue { get; set; } = false;
         public int? QuestionId { get; set; }
         public Question Question { get; set; }
+        public int? SurveyId { get; set; }
+        public Survey Survey { get; set; }
     }
 }

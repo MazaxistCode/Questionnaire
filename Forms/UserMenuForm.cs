@@ -54,5 +54,10 @@ namespace Questionnaire
             Location = new() { X = form.Location.X - 87, Y = form.Location.Y - 75 };
             Visible = true;
         }
+
+        private void CreateButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
