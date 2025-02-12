@@ -29,29 +29,29 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            PassBox = new TextBox();
-            PassLabel = new Label();
-            LoginBox = new TextBox();
+            SaveButton = new Button();
+            groupBox3 = new GroupBox();
             AvatarPictureBox = new PictureBox();
             AvatarButton = new Button();
-            LoginLabel = new Label();
-            PassButton2 = new Button();
-            PassBox2 = new TextBox();
-            PassLabel2 = new Label();
-            groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
-            groupBox3 = new GroupBox();
+            PassLabel = new Label();
+            PassBox = new TextBox();
+            PassLabel2 = new Label();
+            PassBox2 = new TextBox();
+            groupBox1 = new GroupBox();
+            LoginLabel = new Label();
+            LoginBox = new TextBox();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)AvatarPictureBox).BeginInit();
-            groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)AvatarPictureBox).BeginInit();
+            groupBox2.SuspendLayout();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.DodgerBlue;
-            panel1.Controls.Add(PassButton2);
+            panel1.Controls.Add(SaveButton);
             panel1.Controls.Add(groupBox3);
             panel1.Controls.Add(groupBox2);
             panel1.Controls.Add(groupBox1);
@@ -60,30 +60,33 @@
             panel1.Size = new Size(583, 287);
             panel1.TabIndex = 2;
             // 
-            // PassBox
+            // SaveButton
             // 
-            PassBox.Location = new Point(78, 26);
-            PassBox.Name = "PassBox";
-            PassBox.Size = new Size(100, 21);
-            PassBox.TabIndex = 27;
+            SaveButton.BackColor = Color.DeepSkyBlue;
+            SaveButton.FlatAppearance.BorderSize = 0;
+            SaveButton.FlatStyle = FlatStyle.Flat;
+            SaveButton.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold);
+            SaveButton.ForeColor = Color.White;
+            SaveButton.Location = new Point(276, 234);
+            SaveButton.Name = "SaveButton";
+            SaveButton.Size = new Size(284, 35);
+            SaveButton.TabIndex = 31;
+            SaveButton.Text = "Применить изменения";
+            SaveButton.UseVisualStyleBackColor = false;
+            SaveButton.Click += SaveButton_Click;
             // 
-            // PassLabel
+            // groupBox3
             // 
-            PassLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
-            PassLabel.ForeColor = Color.White;
-            PassLabel.Location = new Point(7, 26);
-            PassLabel.Name = "PassLabel";
-            PassLabel.Size = new Size(65, 21);
-            PassLabel.TabIndex = 26;
-            PassLabel.Text = "ПАРОЛЬ";
-            PassLabel.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // LoginBox
-            // 
-            LoginBox.Location = new Point(78, 24);
-            LoginBox.Name = "LoginBox";
-            LoginBox.Size = new Size(100, 21);
-            LoginBox.TabIndex = 25;
+            groupBox3.Controls.Add(AvatarPictureBox);
+            groupBox3.Controls.Add(AvatarButton);
+            groupBox3.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
+            groupBox3.ForeColor = Color.White;
+            groupBox3.Location = new Point(20, 17);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(220, 252);
+            groupBox3.TabIndex = 35;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "АВАТАР";
             // 
             // AvatarPictureBox
             // 
@@ -96,64 +99,18 @@
             // 
             // AvatarButton
             // 
+            AvatarButton.BackColor = Color.DeepSkyBlue;
+            AvatarButton.FlatAppearance.BorderSize = 0;
+            AvatarButton.FlatStyle = FlatStyle.Flat;
+            AvatarButton.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            AvatarButton.ForeColor = Color.White;
             AvatarButton.Location = new Point(21, 205);
             AvatarButton.Name = "AvatarButton";
             AvatarButton.Size = new Size(175, 23);
             AvatarButton.TabIndex = 23;
             AvatarButton.Text = "Изменить фото";
-            AvatarButton.UseVisualStyleBackColor = true;
+            AvatarButton.UseVisualStyleBackColor = false;
             AvatarButton.Click += AvatarButton_Click;
-            // 
-            // LoginLabel
-            // 
-            LoginLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
-            LoginLabel.ForeColor = Color.White;
-            LoginLabel.Location = new Point(17, 24);
-            LoginLabel.Name = "LoginLabel";
-            LoginLabel.Size = new Size(55, 21);
-            LoginLabel.TabIndex = 22;
-            LoginLabel.Text = "ЛОГИН";
-            LoginLabel.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // PassButton2
-            // 
-            PassButton2.Location = new Point(276, 234);
-            PassButton2.Name = "PassButton2";
-            PassButton2.Size = new Size(284, 35);
-            PassButton2.TabIndex = 31;
-            PassButton2.Text = "button2";
-            PassButton2.UseVisualStyleBackColor = true;
-            // 
-            // PassBox2
-            // 
-            PassBox2.Location = new Point(78, 55);
-            PassBox2.Name = "PassBox2";
-            PassBox2.Size = new Size(100, 21);
-            PassBox2.TabIndex = 30;
-            // 
-            // PassLabel2
-            // 
-            PassLabel2.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
-            PassLabel2.ForeColor = Color.White;
-            PassLabel2.Location = new Point(7, 55);
-            PassLabel2.Name = "PassLabel2";
-            PassLabel2.Size = new Size(65, 21);
-            PassLabel2.TabIndex = 32;
-            PassLabel2.Text = "ПАРОЛЬ";
-            PassLabel2.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(LoginLabel);
-            groupBox1.Controls.Add(LoginBox);
-            groupBox1.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
-            groupBox1.ForeColor = Color.White;
-            groupBox1.Location = new Point(276, 17);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(284, 60);
-            groupBox1.TabIndex = 33;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "ЛОГИН";
             // 
             // groupBox2
             // 
@@ -170,18 +127,78 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "ПАРОЛЬ";
             // 
-            // groupBox3
+            // PassLabel
             // 
-            groupBox3.Controls.Add(AvatarPictureBox);
-            groupBox3.Controls.Add(AvatarButton);
-            groupBox3.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
-            groupBox3.ForeColor = Color.White;
-            groupBox3.Location = new Point(20, 17);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(220, 252);
-            groupBox3.TabIndex = 35;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "АВАТАР";
+            PassLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
+            PassLabel.ForeColor = Color.White;
+            PassLabel.Location = new Point(7, 26);
+            PassLabel.Name = "PassLabel";
+            PassLabel.Size = new Size(65, 21);
+            PassLabel.TabIndex = 26;
+            PassLabel.Text = "ПАРОЛЬ";
+            PassLabel.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // PassBox
+            // 
+            PassBox.BackColor = Color.FromArgb(192, 255, 255);
+            PassBox.BorderStyle = BorderStyle.FixedSingle;
+            PassBox.Location = new Point(78, 26);
+            PassBox.Name = "PassBox";
+            PassBox.Size = new Size(100, 21);
+            PassBox.TabIndex = 27;
+            // 
+            // PassLabel2
+            // 
+            PassLabel2.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
+            PassLabel2.ForeColor = Color.White;
+            PassLabel2.Location = new Point(7, 55);
+            PassLabel2.Name = "PassLabel2";
+            PassLabel2.Size = new Size(65, 21);
+            PassLabel2.TabIndex = 32;
+            PassLabel2.Text = "ПАРОЛЬ";
+            PassLabel2.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // PassBox2
+            // 
+            PassBox2.BackColor = Color.FromArgb(192, 255, 255);
+            PassBox2.BorderStyle = BorderStyle.FixedSingle;
+            PassBox2.Location = new Point(78, 55);
+            PassBox2.Name = "PassBox2";
+            PassBox2.Size = new Size(100, 21);
+            PassBox2.TabIndex = 30;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(LoginLabel);
+            groupBox1.Controls.Add(LoginBox);
+            groupBox1.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
+            groupBox1.ForeColor = Color.White;
+            groupBox1.Location = new Point(276, 17);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(284, 60);
+            groupBox1.TabIndex = 33;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "ЛОГИН";
+            // 
+            // LoginLabel
+            // 
+            LoginLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
+            LoginLabel.ForeColor = Color.White;
+            LoginLabel.Location = new Point(17, 24);
+            LoginLabel.Name = "LoginLabel";
+            LoginLabel.Size = new Size(55, 21);
+            LoginLabel.TabIndex = 22;
+            LoginLabel.Text = "ЛОГИН";
+            LoginLabel.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // LoginBox
+            // 
+            LoginBox.BackColor = Color.FromArgb(192, 255, 255);
+            LoginBox.BorderStyle = BorderStyle.FixedSingle;
+            LoginBox.Location = new Point(78, 24);
+            LoginBox.Name = "LoginBox";
+            LoginBox.Size = new Size(100, 21);
+            LoginBox.TabIndex = 25;
             // 
             // AccountForm
             // 
@@ -196,12 +213,12 @@
             Text = "AccountForm";
             Load += AccountForm_Load;
             panel1.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)AvatarPictureBox).EndInit();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            groupBox3.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -216,7 +233,7 @@
         private TextBox LoginBox;
         private GroupBox groupBox1;
         private Label PassLabel2;
-        private Button PassButton2;
+        private Button SaveButton;
         private TextBox PassBox2;
         private GroupBox groupBox3;
         private GroupBox groupBox2;

@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using Questionnaire.DB;
+﻿using Questionnaire.DB;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,6 +42,37 @@ namespace Questionnaire
                 }
             }
             AvatarPictureBox.Image = new Bitmap(pathAvatar);
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            using (Context context = new())
+            {
+                User user = context.Users.Where(user => user.Email == UserEmail).First();
+                bool isLogin = false;
+                bool isPass = false;
+                if (LoginBox.Text != null)
+                    isLogin = user.Login != LoginBox.Text;
+                if (PassBox.Text != null && PassBox2.Text != null)
+                    isPass = user.Password != (PassBox.Text == PassBox2.Text ? PassBox.Text : null);
+                Random rand = new();
+                int code = rand.Next(1784736, 9897435) - 2767;
+                Email.SendMessageOnEmail(UserEmail, code);
+                EnterCodeForm form = new();
+                Visible = false;
+                form.Location = new() { X = Location.X + 112, Y = Location.Y + 75 };
+                System.Timers.Timer timer = new System.Timers.Timer(60000);
+                form.ShowDialog();
+                Location = new() { X = form.Location.X - 112, Y = form.Location.Y - 75 };
+                string enterCode = form.codeBox.Text;
+                if ($"{code}" == enterCode)
+                {
+                    user.Login = isLogin ? LoginBox.Text : user.Login;
+                    user.Password = isLogin ? PassBox.Text : user.Password;
+                    context.SaveChanges();
+                }
+                Visible = true;
+            }
         }
     }
 }
