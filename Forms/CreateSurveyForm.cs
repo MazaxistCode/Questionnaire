@@ -45,7 +45,7 @@ namespace Questionnaire.Forms
 
         private void CreateSurveyButton_Click(object sender, EventArgs e)
         {
-            using(Context context = new())
+            using (Context context = new())
             {
                 context.Surveies.Add(survey);
                 context.Questions.AddRange([.. questions]);
@@ -81,7 +81,7 @@ namespace Questionnaire.Forms
         {
             if (QuestionNameBox.Text != string.Empty && questions.Where(question => question.Name == QuestionNameBox.Text).Any())
             {
-                foreach(var answer in answers.Where(answer => answer.Question == questions.Where(question => question.Name == QuestionNameBox.Text).First()).ToList())
+                foreach (var answer in answers.Where(answer => answer.Question == questions.Where(question => question.Name == QuestionNameBox.Text).First()).ToList())
                     answers.Remove(answer);
                 questions.Remove(questions.Where(question => question.Name == QuestionNameBox.Text).First());
                 QuestionListBox.Items.Clear();
@@ -159,27 +159,71 @@ namespace Questionnaire.Forms
 
         private void QuestionListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Question questionOn = questions.Where(question => question.Name == QuestionListBox.Text).First();
-            QuestionNameBox.Text = questionOn.Name;
-            this.questionOn = questionOn;
-            AnswerListBox.Items.Clear();
-            foreach (var answer in answers.Where(answer => answer.Question == questionOn))
+            if (QuestionListBox.Text != string.Empty)
             {
-                AnswerListBox.Items.Add(answer.Name);
+                Question questionOn = questions.Where(question => question.Name == QuestionListBox.Text).First();
+                QuestionNameBox.Text = questionOn.Name;
+                this.questionOn = questionOn;
+                QuestionUpdateBox.Text = questionOn.Name;
+                AnswerListBox.Items.Clear();
+                foreach (var answer in answers.Where(answer => answer.Question == questionOn))
+                {
+                    AnswerListBox.Items.Add(answer.Name);
+                }
+                QuestionLabel.Text = QuestionNameBox.Text;
+                IsTrueAnswerBox.Checked = false;
+                AnswerNameBox.Text = string.Empty;
+                AnswerBallBox.Text = string.Empty;
             }
-            QuestionLabel.Text = QuestionNameBox.Text;
-            IsTrueAnswerBox.Checked = false;
-            AnswerNameBox.Text = string.Empty;
-            AnswerBallBox.Text = string.Empty;
         }
 
         private void AnswerListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Answer answerOn = answers.Where(answer => answer.Name == AnswerListBox.Text).First();
-            QuestionLabel.Text = answerOn.Question.Name;
-            AnswerNameBox.Text = answerOn.Name;
-            AnswerBallBox.Text = $"{answerOn.Ball}";
-            IsTrueAnswerBox.Checked = answerOn.IsTrue;
+            if (AnswerListBox.Text != string.Empty)
+            {
+                Answer answerOn = answers.Where(answer => answer.Name == AnswerListBox.Text).First();
+                AnswerUpdateBox.Text = answerOn.Name;
+                QuestionLabel.Text = answerOn.Question.Name;
+                AnswerNameBox.Text = answerOn.Name;
+                AnswerBallBox.Text = $"{answerOn.Ball}";
+                IsTrueAnswerBox.Checked = answerOn.IsTrue;
+            }
+        }
+
+        private void QuestionUpdateButton_Click(object sender, EventArgs e)
+        {
+            if (QuestionNameBox.Text != string.Empty && QuestionUpdateBox.Text != string.Empty && QuestionNameBox.Text != QuestionUpdateBox.Text && !questions.Where(question => question.Name == QuestionUpdateBox.Text).Any())
+            {
+                Question questionOn = questions.Where(question => question.Name == QuestionNameBox.Text).First();
+                questionOn.Name = QuestionUpdateBox.Text;
+                QuestionNameBox.Text = QuestionUpdateBox.Text;
+                QuestionListBox.Items.Clear();
+                foreach (var question in questions.Where(question => question.Name.Contains(QuestionSearchBox.Text)))
+                {
+                    QuestionListBox.Items.Add(question.Name);
+                }
+                QuestionLabel.Text = questionOn.Name;
+                AnswerListBox.Items.Clear();
+                foreach (var answer in answers.Where(answer => answer.Question == this.questionOn))
+                {
+                    AnswerListBox.Items.Add(answer.Name);
+                }
+            }
+        }
+
+        private void AnswerUpdateButton_Click(object sender, EventArgs e)
+        {
+            if (AnswerNameBox.Text != string.Empty && AnswerUpdateBox.Text != string.Empty && AnswerNameBox.Text != AnswerUpdateBox.Text && !answers.Where(answer => answer.Question.Name == QuestionLabel.Text && answer.Name == AnswerUpdateBox.Text).Any())
+            {
+                Answer answerOn = answers.Where(answer => answer.Question.Name == QuestionLabel.Text && answer.Name == AnswerNameBox.Text).First();
+                answerOn.Name = AnswerUpdateBox.Text;
+                AnswerListBox.Items.Clear();
+                foreach (var answer in answers.Where(answer => answer.Question == questionOn))
+                {
+                    AnswerListBox.Items.Add(answer.Name);
+                }
+                AnswerNameBox.Text = AnswerUpdateBox.Text;
+            }
         }
     }
 }
