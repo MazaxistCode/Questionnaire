@@ -29,9 +29,13 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            CreateSurveyButton = new Button();
             SurveyNameLabel = new Label();
             SurveyNameBox = new TextBox();
             groupBox1 = new GroupBox();
+            AnswerUpdateButton = new Button();
+            AnswerUpdateLabel = new Label();
+            AnswerUpdateBox = new TextBox();
             QuestionLabel = new Label();
             QuestionOnLabel = new Label();
             AnswerBallLabel = new Label();
@@ -45,6 +49,9 @@
             AddAnswerButton = new Button();
             RemAnswerButton = new Button();
             groupBox2 = new GroupBox();
+            QuestionUpdateLabel = new Label();
+            QuestionUpdateBox = new TextBox();
+            QuestionUpdateButton = new Button();
             QuestionNameLabel = new Label();
             QuestionNameBox = new TextBox();
             QuestionListBox = new ListBox();
@@ -52,7 +59,6 @@
             QuestionSearchBox = new TextBox();
             AddQuestionButton = new Button();
             RemQuestionButton = new Button();
-            CreateSurveyButton = new Button();
             panel1.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -70,6 +76,21 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(760, 437);
             panel1.TabIndex = 3;
+            // 
+            // CreateSurveyButton
+            // 
+            CreateSurveyButton.BackColor = Color.DeepSkyBlue;
+            CreateSurveyButton.FlatAppearance.BorderSize = 0;
+            CreateSurveyButton.FlatStyle = FlatStyle.Flat;
+            CreateSurveyButton.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            CreateSurveyButton.ForeColor = Color.White;
+            CreateSurveyButton.Location = new Point(604, 18);
+            CreateSurveyButton.Name = "CreateSurveyButton";
+            CreateSurveyButton.Size = new Size(139, 23);
+            CreateSurveyButton.TabIndex = 33;
+            CreateSurveyButton.Text = "СОЗДАТЬ ОПРОС";
+            CreateSurveyButton.UseVisualStyleBackColor = false;
+            CreateSurveyButton.Click += CreateSurveyButton_Click;
             // 
             // SurveyNameLabel
             // 
@@ -93,6 +114,9 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(AnswerUpdateButton);
+            groupBox1.Controls.Add(AnswerUpdateLabel);
+            groupBox1.Controls.Add(AnswerUpdateBox);
             groupBox1.Controls.Add(QuestionLabel);
             groupBox1.Controls.Add(QuestionOnLabel);
             groupBox1.Controls.Add(AnswerBallLabel);
@@ -114,11 +138,46 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "ОТВЫТЫ";
             // 
+            // AnswerUpdateButton
+            // 
+            AnswerUpdateButton.BackColor = Color.DeepSkyBlue;
+            AnswerUpdateButton.FlatAppearance.BorderSize = 0;
+            AnswerUpdateButton.FlatStyle = FlatStyle.Flat;
+            AnswerUpdateButton.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            AnswerUpdateButton.ForeColor = Color.White;
+            AnswerUpdateButton.Location = new Point(193, 335);
+            AnswerUpdateButton.Name = "AnswerUpdateButton";
+            AnswerUpdateButton.Size = new Size(159, 23);
+            AnswerUpdateButton.TabIndex = 35;
+            AnswerUpdateButton.Text = "ИЗМЕНИТЬ";
+            AnswerUpdateButton.UseVisualStyleBackColor = false;
+            AnswerUpdateButton.Click += AnswerUpdateButton_Click;
+            // 
+            // AnswerUpdateLabel
+            // 
+            AnswerUpdateLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
+            AnswerUpdateLabel.ForeColor = Color.White;
+            AnswerUpdateLabel.Location = new Point(193, 272);
+            AnswerUpdateLabel.Name = "AnswerUpdateLabel";
+            AnswerUpdateLabel.Size = new Size(159, 33);
+            AnswerUpdateLabel.TabIndex = 33;
+            AnswerUpdateLabel.Text = "ИМЯ ОТВЕТА ДЛЯ ИЗМЕНЕНИЯ";
+            AnswerUpdateLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // AnswerUpdateBox
+            // 
+            AnswerUpdateBox.BackColor = Color.FromArgb(192, 255, 255);
+            AnswerUpdateBox.BorderStyle = BorderStyle.FixedSingle;
+            AnswerUpdateBox.Location = new Point(193, 308);
+            AnswerUpdateBox.Name = "AnswerUpdateBox";
+            AnswerUpdateBox.Size = new Size(159, 21);
+            AnswerUpdateBox.TabIndex = 34;
+            // 
             // QuestionLabel
             // 
             QuestionLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
             QuestionLabel.ForeColor = Color.White;
-            QuestionLabel.Location = new Point(193, 73);
+            QuestionLabel.Location = new Point(193, 61);
             QuestionLabel.Name = "QuestionLabel";
             QuestionLabel.Size = new Size(159, 21);
             QuestionLabel.TabIndex = 32;
@@ -129,7 +188,7 @@
             // 
             QuestionOnLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
             QuestionOnLabel.ForeColor = Color.White;
-            QuestionOnLabel.Location = new Point(193, 22);
+            QuestionOnLabel.Location = new Point(193, 23);
             QuestionOnLabel.Name = "QuestionOnLabel";
             QuestionOnLabel.Size = new Size(159, 34);
             QuestionOnLabel.TabIndex = 31;
@@ -140,7 +199,7 @@
             // 
             AnswerBallLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
             AnswerBallLabel.ForeColor = Color.White;
-            AnswerBallLabel.Location = new Point(193, 216);
+            AnswerBallLabel.Location = new Point(193, 169);
             AnswerBallLabel.Name = "AnswerBallLabel";
             AnswerBallLabel.Size = new Size(159, 37);
             AnswerBallLabel.TabIndex = 29;
@@ -151,7 +210,7 @@
             // 
             AnswerBallBox.BackColor = Color.FromArgb(192, 255, 255);
             AnswerBallBox.BorderStyle = BorderStyle.FixedSingle;
-            AnswerBallBox.Location = new Point(193, 256);
+            AnswerBallBox.Location = new Point(193, 209);
             AnswerBallBox.Name = "AnswerBallBox";
             AnswerBallBox.Size = new Size(159, 21);
             AnswerBallBox.TabIndex = 30;
@@ -160,7 +219,7 @@
             // 
             IsTrueAnswerBox.FlatAppearance.BorderSize = 0;
             IsTrueAnswerBox.FlatStyle = FlatStyle.Flat;
-            IsTrueAnswerBox.Location = new Point(193, 165);
+            IsTrueAnswerBox.Location = new Point(193, 137);
             IsTrueAnswerBox.Name = "IsTrueAnswerBox";
             IsTrueAnswerBox.Size = new Size(159, 19);
             IsTrueAnswerBox.TabIndex = 28;
@@ -171,7 +230,7 @@
             // 
             AnswerNameLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
             AnswerNameLabel.ForeColor = Color.White;
-            AnswerNameLabel.Location = new Point(193, 114);
+            AnswerNameLabel.Location = new Point(193, 86);
             AnswerNameLabel.Name = "AnswerNameLabel";
             AnswerNameLabel.Size = new Size(159, 21);
             AnswerNameLabel.TabIndex = 26;
@@ -182,7 +241,7 @@
             // 
             AnswerNameBox.BackColor = Color.FromArgb(192, 255, 255);
             AnswerNameBox.BorderStyle = BorderStyle.FixedSingle;
-            AnswerNameBox.Location = new Point(193, 138);
+            AnswerNameBox.Location = new Point(193, 110);
             AnswerNameBox.Name = "AnswerNameBox";
             AnswerNameBox.Size = new Size(159, 21);
             AnswerNameBox.TabIndex = 27;
@@ -230,11 +289,11 @@
             AddAnswerButton.FlatStyle = FlatStyle.Flat;
             AddAnswerButton.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             AddAnswerButton.ForeColor = Color.White;
-            AddAnswerButton.Location = new Point(193, 283);
+            AddAnswerButton.Location = new Point(193, 236);
             AddAnswerButton.Name = "AddAnswerButton";
             AddAnswerButton.Size = new Size(159, 23);
             AddAnswerButton.TabIndex = 7;
-            AddAnswerButton.Text = "ДОБАВИТЬ";
+            AddAnswerButton.Text = "ДОБАВИТЬ / ПРИМЕНИТЬ";
             AddAnswerButton.UseVisualStyleBackColor = false;
             AddAnswerButton.Click += AddAnswerButton_Click;
             // 
@@ -255,6 +314,9 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(QuestionUpdateLabel);
+            groupBox2.Controls.Add(QuestionUpdateBox);
+            groupBox2.Controls.Add(QuestionUpdateButton);
             groupBox2.Controls.Add(QuestionNameLabel);
             groupBox2.Controls.Add(QuestionNameBox);
             groupBox2.Controls.Add(QuestionListBox);
@@ -270,6 +332,41 @@
             groupBox2.TabIndex = 34;
             groupBox2.TabStop = false;
             groupBox2.Text = "ВОПРОСЫ";
+            // 
+            // QuestionUpdateLabel
+            // 
+            QuestionUpdateLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
+            QuestionUpdateLabel.ForeColor = Color.White;
+            QuestionUpdateLabel.Location = new Point(193, 110);
+            QuestionUpdateLabel.Name = "QuestionUpdateLabel";
+            QuestionUpdateLabel.Size = new Size(166, 36);
+            QuestionUpdateLabel.TabIndex = 29;
+            QuestionUpdateLabel.Text = "ИМЯ ВОПРОСА ДЛЯ ИЗМЕНЕНИЯ";
+            QuestionUpdateLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // QuestionUpdateBox
+            // 
+            QuestionUpdateBox.BackColor = Color.FromArgb(192, 255, 255);
+            QuestionUpdateBox.BorderStyle = BorderStyle.FixedSingle;
+            QuestionUpdateBox.Location = new Point(193, 149);
+            QuestionUpdateBox.Name = "QuestionUpdateBox";
+            QuestionUpdateBox.Size = new Size(166, 21);
+            QuestionUpdateBox.TabIndex = 30;
+            // 
+            // QuestionUpdateButton
+            // 
+            QuestionUpdateButton.BackColor = Color.DeepSkyBlue;
+            QuestionUpdateButton.FlatAppearance.BorderSize = 0;
+            QuestionUpdateButton.FlatStyle = FlatStyle.Flat;
+            QuestionUpdateButton.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            QuestionUpdateButton.ForeColor = Color.White;
+            QuestionUpdateButton.Location = new Point(193, 176);
+            QuestionUpdateButton.Name = "QuestionUpdateButton";
+            QuestionUpdateButton.Size = new Size(166, 23);
+            QuestionUpdateButton.TabIndex = 28;
+            QuestionUpdateButton.Text = "ИЗМЕНИТЬ";
+            QuestionUpdateButton.UseVisualStyleBackColor = false;
+            QuestionUpdateButton.Click += QuestionUpdateButton_Click;
             // 
             // QuestionNameLabel
             // 
@@ -357,21 +454,6 @@
             RemQuestionButton.UseVisualStyleBackColor = false;
             RemQuestionButton.Click += RemQuestionButton_Click;
             // 
-            // CreateSurveyButton
-            // 
-            CreateSurveyButton.BackColor = Color.DeepSkyBlue;
-            CreateSurveyButton.FlatAppearance.BorderSize = 0;
-            CreateSurveyButton.FlatStyle = FlatStyle.Flat;
-            CreateSurveyButton.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            CreateSurveyButton.ForeColor = Color.White;
-            CreateSurveyButton.Location = new Point(604, 18);
-            CreateSurveyButton.Name = "CreateSurveyButton";
-            CreateSurveyButton.Size = new Size(139, 23);
-            CreateSurveyButton.TabIndex = 33;
-            CreateSurveyButton.Text = "СОЗДАТЬ ОПРОС";
-            CreateSurveyButton.UseVisualStyleBackColor = false;
-            CreateSurveyButton.Click += CreateSurveyButton_Click;
-            // 
             // CreateSurveyForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -422,5 +504,11 @@
         private Label QuestionLabel;
         private Label QuestionOnLabel;
         private Button CreateSurveyButton;
+        private Button AnswerUpdateButton;
+        private Label AnswerUpdateLabel;
+        private TextBox AnswerUpdateBox;
+        private Label QuestionUpdateLabel;
+        private TextBox QuestionUpdateBox;
+        private Button QuestionUpdateButton;
     }
 }
