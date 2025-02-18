@@ -27,18 +27,18 @@ namespace Questionnaire
 
         private void AvatarButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog uaerAvatar = new();
+            OpenFileDialog userAvatar = new();
             string pathAvatar = AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug\\net9.0-windows", "Avatars") + UserEmail.GetHash() + ".png";
-            uaerAvatar.Filter = "JPeg|*.jpg|Png|*.png";
-            uaerAvatar.Title = "Выберите фото";
-            uaerAvatar.ShowDialog();
-            if (uaerAvatar.FileName != "")
+            userAvatar.Filter = "Png|*.png";
+            userAvatar.Title = "Выберите фото";
+            userAvatar.ShowDialog();
+            if (userAvatar.FileName != "")
             {
-                if (File.Exists(uaerAvatar.FileName))
+                if (File.Exists(userAvatar.FileName))
                 {
                     AvatarPictureBox.Image?.Dispose();
                     AvatarPictureBox.Image = null;
-                    File.Copy(uaerAvatar.FileName, pathAvatar, true);
+                    File.Copy(userAvatar.FileName, pathAvatar, true);
                 }
             }
             AvatarPictureBox.Image = new Bitmap(pathAvatar);
