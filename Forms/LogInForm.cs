@@ -27,8 +27,7 @@ namespace Questionnaire
             StartDB();
             if (isTest)
             {
-                //UserMenuForm form = new(UserEmail);
-                CreateSurveyForm form = new(UserEmail);
+                UserMenuForm form = new(UserEmail);
                 Visible = false;
                 form.ShowDialog();
                 Close();
@@ -137,7 +136,7 @@ namespace Questionnaire
                 {
                     if (context.Users.Where(user => user.Password == password.GetHash()).Any())
                     {
-                        UserMenuForm form = new(login);
+                        UserMenuForm form = new(context.Users.Where(user => user.Login == login).First().Email);
                         Visible = false;
                         form.ShowDialog();
                         Close();

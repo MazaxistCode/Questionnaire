@@ -33,9 +33,9 @@
             SearchBox = new TextBox();
             SearchButton = new Button();
             AccountButton = new Button();
-            button3 = new Button();
+            UserSurveiesButton = new Button();
             button2 = new Button();
-            CreateButton = new Button();
+            CreateSurveyButton = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -56,9 +56,9 @@
             panel1.Controls.Add(SearchBox);
             panel1.Controls.Add(SearchButton);
             panel1.Controls.Add(AccountButton);
-            panel1.Controls.Add(button3);
+            panel1.Controls.Add(UserSurveiesButton);
             panel1.Controls.Add(button2);
-            panel1.Controls.Add(CreateButton);
+            panel1.Controls.Add(CreateSurveyButton);
             panel1.Controls.Add(SurveiesListBox);
             panel1.Location = new Point(12, 12);
             panel1.Name = "panel1";
@@ -104,19 +104,20 @@
             AccountButton.UseVisualStyleBackColor = false;
             AccountButton.Click += AccountButton_Click;
             // 
-            // button3
+            // UserSurveiesButton
             // 
-            button3.BackColor = Color.DeepSkyBlue;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold);
-            button3.ForeColor = Color.White;
-            button3.Location = new Point(484, 218);
-            button3.Name = "button3";
-            button3.Size = new Size(232, 81);
-            button3.TabIndex = 3;
-            button3.Text = "Мои опросы";
-            button3.UseVisualStyleBackColor = false;
+            UserSurveiesButton.BackColor = Color.DeepSkyBlue;
+            UserSurveiesButton.FlatAppearance.BorderSize = 0;
+            UserSurveiesButton.FlatStyle = FlatStyle.Flat;
+            UserSurveiesButton.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold);
+            UserSurveiesButton.ForeColor = Color.White;
+            UserSurveiesButton.Location = new Point(484, 218);
+            UserSurveiesButton.Name = "UserSurveiesButton";
+            UserSurveiesButton.Size = new Size(232, 81);
+            UserSurveiesButton.TabIndex = 3;
+            UserSurveiesButton.Text = "Мои опросы";
+            UserSurveiesButton.UseVisualStyleBackColor = false;
+            UserSurveiesButton.Click += UserSurveiesButton_Click;
             // 
             // button2
             // 
@@ -132,22 +133,22 @@
             button2.Text = "Открыть опрос";
             button2.UseVisualStyleBackColor = false;
             // 
-            // CreateButton
+            // CreateSurveyButton
             // 
-            CreateButton.BackColor = Color.DeepSkyBlue;
-            CreateButton.FlatAppearance.BorderSize = 0;
-            CreateButton.FlatStyle = FlatStyle.Flat;
-            CreateButton.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold);
-            CreateButton.ForeColor = Color.White;
-            CreateButton.Location = new Point(484, 131);
-            CreateButton.Name = "CreateButton";
-            CreateButton.Size = new Size(232, 81);
-            CreateButton.TabIndex = 1;
-            CreateButton.Text = "Создать опрос";
-            CreateButton.UseVisualStyleBackColor = false;
-            CreateButton.Click += CreateButton_Click;
+            CreateSurveyButton.BackColor = Color.DeepSkyBlue;
+            CreateSurveyButton.FlatAppearance.BorderSize = 0;
+            CreateSurveyButton.FlatStyle = FlatStyle.Flat;
+            CreateSurveyButton.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold);
+            CreateSurveyButton.ForeColor = Color.White;
+            CreateSurveyButton.Location = new Point(484, 131);
+            CreateSurveyButton.Name = "CreateSurveyButton";
+            CreateSurveyButton.Size = new Size(232, 81);
+            CreateSurveyButton.TabIndex = 1;
+            CreateSurveyButton.Text = "Создать опрос";
+            CreateSurveyButton.UseVisualStyleBackColor = false;
+            CreateSurveyButton.Click += CreateSurveyButton_Click;
             // 
-            // ListSurveyForm
+            // UserMenuForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -157,7 +158,7 @@
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
-            Name = "ListSurveyForm";
+            Name = "UserMenuForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "UserMenu";
             Load += UserMenu_Load;
@@ -170,9 +171,9 @@
 
         private ListBox SurveiesListBox;
         private Panel panel1;
-        private Button button3;
+        private Button UserSurveiesButton;
         private Button button2;
-        private Button CreateButton;
+        private Button CreateSurveyButton;
         private Button AccountButton;
         private TextBox SearchBox;
         private Button SearchButton;

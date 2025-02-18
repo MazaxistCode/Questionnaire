@@ -33,13 +33,13 @@
             SurveyNameLabel = new Label();
             SurveyNameBox = new TextBox();
             groupBox1 = new GroupBox();
+            AnswerBallBox = new NumericUpDown();
             AnswerUpdateButton = new Button();
             AnswerUpdateLabel = new Label();
             AnswerUpdateBox = new TextBox();
             QuestionLabel = new Label();
             QuestionOnLabel = new Label();
             AnswerBallLabel = new Label();
-            AnswerBallBox = new TextBox();
             IsTrueAnswerBox = new CheckBox();
             AnswerNameLabel = new Label();
             AnswerNameBox = new TextBox();
@@ -61,6 +61,7 @@
             RemQuestionButton = new Button();
             panel1.SuspendLayout();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)AnswerBallBox).BeginInit();
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
@@ -114,13 +115,13 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(AnswerBallBox);
             groupBox1.Controls.Add(AnswerUpdateButton);
             groupBox1.Controls.Add(AnswerUpdateLabel);
             groupBox1.Controls.Add(AnswerUpdateBox);
             groupBox1.Controls.Add(QuestionLabel);
             groupBox1.Controls.Add(QuestionOnLabel);
             groupBox1.Controls.Add(AnswerBallLabel);
-            groupBox1.Controls.Add(AnswerBallBox);
             groupBox1.Controls.Add(IsTrueAnswerBox);
             groupBox1.Controls.Add(AnswerNameLabel);
             groupBox1.Controls.Add(AnswerNameBox);
@@ -137,6 +138,16 @@
             groupBox1.TabIndex = 35;
             groupBox1.TabStop = false;
             groupBox1.Text = "ОТВЫТЫ";
+            // 
+            // AnswerBallBox
+            // 
+            AnswerBallBox.BackColor = Color.FromArgb(192, 255, 255);
+            AnswerBallBox.BorderStyle = BorderStyle.FixedSingle;
+            AnswerBallBox.ForeColor = SystemColors.WindowText;
+            AnswerBallBox.Location = new Point(193, 209);
+            AnswerBallBox.Name = "AnswerBallBox";
+            AnswerBallBox.Size = new Size(159, 21);
+            AnswerBallBox.TabIndex = 31;
             // 
             // AnswerUpdateButton
             // 
@@ -205,15 +216,6 @@
             AnswerBallLabel.TabIndex = 29;
             AnswerBallLabel.Text = "ЧИСЛО БАЛЛОВ ЗА ВЫБОР";
             AnswerBallLabel.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // AnswerBallBox
-            // 
-            AnswerBallBox.BackColor = Color.FromArgb(192, 255, 255);
-            AnswerBallBox.BorderStyle = BorderStyle.FixedSingle;
-            AnswerBallBox.Location = new Point(193, 209);
-            AnswerBallBox.Name = "AnswerBallBox";
-            AnswerBallBox.Size = new Size(159, 21);
-            AnswerBallBox.TabIndex = 30;
             // 
             // IsTrueAnswerBox
             // 
@@ -472,6 +474,7 @@
             panel1.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)AnswerBallBox).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ResumeLayout(false);
@@ -498,7 +501,6 @@
         private Button AddAnswerButton;
         private Button RemAnswerButton;
         private Label AnswerBallLabel;
-        private TextBox AnswerBallBox;
         private Label SurveyNameLabel;
         private TextBox SurveyNameBox;
         private Label QuestionLabel;
@@ -510,5 +512,6 @@
         private Label QuestionUpdateLabel;
         private TextBox QuestionUpdateBox;
         private Button QuestionUpdateButton;
+        private NumericUpDown AnswerBallBox;
     }
 }
