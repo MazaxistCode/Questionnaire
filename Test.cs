@@ -52,6 +52,7 @@ namespace Questionnaire
                 text +=
                     user.Id + "   " +
                     user.Name + "   " +
+                    user.Ball + "   " +
                     user.UserId
                     + "\n";
             }
@@ -73,6 +74,7 @@ namespace Questionnaire
                     user.Id + "   " +
                     user.Name + "   " +
                     user.IsTrue + "   " +
+                    user.SurveyId + "   " +
                     user.QuestionId
                     + "\n";
             }

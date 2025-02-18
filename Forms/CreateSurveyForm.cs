@@ -18,14 +18,16 @@ namespace Questionnaire.Forms
             UserEmail = email;
             using (Context context = new())
             {
-                this.survey = survey ?? new() { User = context.Users.Where(user => user.Email == email).First() };
+                this.survey = survey ?? new();
                 questions = survey is null ? [] : context.Questions.Where(question => question.SurveyId == survey.Id).ToList();
                 answers = survey is null ? [] : context.Answers.Where(answer => answer.SurveyId == survey.Id).ToList();
-                questionOn = questions.FirstOrDefault() ?? new() { Survey = this.survey };
+                questionOn = questions.FirstOrDefault() ?? new();
+                IsEdit = survey is not null;
             }
             InitializeComponent();
         }
-        private string UserEmail { get; set; }
+        bool IsEdit { get; set; }
+        string UserEmail { get; set; }
         private Survey survey;
         private List<Question> questions;
         private Question questionOn;
@@ -33,6 +35,12 @@ namespace Questionnaire.Forms
 
         private void CreateSurveyForm_Load(object sender, EventArgs e)
         {
+            if(IsEdit)
+            {
+                SurveyNameBox.Text = survey.Name;
+                SurveyNameBox.ReadOnly = true;
+
+            }
             using (Context context = new())
             {
                 QuestionListBox.Items.Clear();
@@ -47,9 +55,50 @@ namespace Questionnaire.Forms
         {
             using (Context context = new())
             {
-                context.Surveies.Add(survey);
-                context.Questions.AddRange([.. questions]);
-                context.Answers.AddRange([.. answers]);
+                if (questions.Any() && answers.Any() && questions.Where(question =>
+                answers.Where(answer => answer.Question == question).Any()).Count() == questions.Count() &&
+                SurveyNameBox.Text != string.Empty &&
+                    !context.Surveies.Where(survey => survey.Name == SurveyNameBox.Text).Any())
+                {
+                    int maxBall = 0;
+                    foreach (var answer in answers)
+                        maxBall += answer.Ball;
+                    if (IsEdit)
+                    {
+                        survey.Ball = maxBall;
+                        Question[] oldDB = context.Questions.Where(question => question.SurveyId == survey.Id).ToArray();
+                        foreach (var question in oldDB)
+                        {
+                            foreach (var oldQuestion in questions)
+                            {
+                                
+                            }
+                        }
+                        foreach (var questionOn in questions)
+                        {
+                            Question? DBQuestion = context.Questions.Where(question => question.SurveyId == survey.Id).Where(question => question.Id == questionOn.Id).FirstOrDefault();
+                            if (DBQuestion is not null)
+                            {
+                                DBQuestion.Name = questionOn.Name;
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        survey.User = context.Users.Where(user => user.Email == UserEmail).First();
+                        survey.Ball = maxBall;
+                        survey.Name = SurveyNameBox.Text;
+                        context.Surveies.Add(survey);
+                        context.Questions.AddRange([.. questions]);
+                        context.Answers.AddRange([.. answers]);
+                    }
+                    context.SaveChanges();
+                    Close();
+                }
             }
         }
 
@@ -62,6 +111,14 @@ namespace Questionnaire.Forms
                 {
                     QuestionListBox.Items.Add(question.Name);
                 }
+                AnswerListBox.Items.Clear();
+                QuestionLabel.Text = "ВОПРОС";
+                QuestionNameBox.Text = string.Empty;
+                QuestionUpdateBox.Text = string.Empty;
+                AnswerNameBox.Text = string.Empty;
+                AnswerBallBox.Text = "0";
+                IsTrueAnswerBox.Checked = false;
+                AnswerUpdateBox.Text = string.Empty;
             }
         }
 
@@ -74,6 +131,10 @@ namespace Questionnaire.Forms
                 {
                     AnswerListBox.Items.Add(answer.Name);
                 }
+                AnswerNameBox.Text = string.Empty;
+                AnswerBallBox.Text = "0";
+                IsTrueAnswerBox.Checked = false;
+                AnswerUpdateBox.Text = string.Empty;
             }
         }
 
@@ -83,12 +144,13 @@ namespace Questionnaire.Forms
             {
                 foreach (var answer in answers.Where(answer => answer.Question == questions.Where(question => question.Name == QuestionNameBox.Text).First()).ToList())
                     answers.Remove(answer);
-                questions.Remove(questions.Where(question => question.Name == QuestionNameBox.Text).First());
+                questions.Remove(questionOn);
                 QuestionListBox.Items.Clear();
                 foreach (var question in questions.Where(question => question.Name.Contains(QuestionSearchBox.Text)))
                 {
                     QuestionListBox.Items.Add(question.Name);
                 }
+                AnswerSearchBox.Text = string.Empty;
                 AnswerListBox.Items.Clear();
                 foreach (var answer in answers.Where(answer => answer.Question == questionOn))
                 {
@@ -97,8 +159,10 @@ namespace Questionnaire.Forms
                 QuestionLabel.Text = "ВОПРОС";
                 IsTrueAnswerBox.Checked = false;
                 AnswerNameBox.Text = string.Empty;
-                AnswerBallBox.Text = string.Empty;
+                AnswerBallBox.Text = "0";
+                AnswerUpdateBox.Text = string.Empty;
                 QuestionNameBox.Text = string.Empty;
+                QuestionUpdateBox.Text = string.Empty;
             }
         }
 
@@ -106,6 +170,7 @@ namespace Questionnaire.Forms
         {
             if (QuestionNameBox.Text != string.Empty && !questions.Where(question => question.Name == QuestionNameBox.Text).Any())
                 questions.Add(new() { Name = QuestionNameBox.Text, Survey = survey });
+            QuestionUpdateBox.Text = QuestionNameBox.Text;
             QuestionListBox.Items.Clear();
             foreach (var question in questions.Where(question => question.Name.Contains(QuestionSearchBox.Text)))
             {
@@ -121,7 +186,7 @@ namespace Questionnaire.Forms
             QuestionLabel.Text = QuestionNameBox.Text;
             IsTrueAnswerBox.Checked = false;
             AnswerNameBox.Text = string.Empty;
-            AnswerBallBox.Text = string.Empty;
+            AnswerBallBox.Text = "0";
         }
 
         private void RemAnswerButton_Click(object sender, EventArgs e)
@@ -133,14 +198,18 @@ namespace Questionnaire.Forms
             {
                 AnswerListBox.Items.Add(answer.Name);
             }
+            IsTrueAnswerBox.Checked = false;
+            AnswerNameBox.Text = string.Empty;
+            AnswerBallBox.Text = "0";
+            AnswerUpdateBox.Text = string.Empty;
         }
 
         private void AddAnswerButton_Click(object sender, EventArgs e)
         {
-            if (AnswerNameBox.Text != string.Empty && AnswerBallBox.Text != string.Empty && questions.Where(question => question.Name == QuestionLabel.Text).Any())
+            if (AnswerNameBox.Text != string.Empty && questions.Where(question => question.Name == QuestionLabel.Text).Any())
             {
-                bool isNewAnswer = !answers.Where(answer => answer.Name == AnswerNameBox.Text).Any();
-                Answer answer = answers.Where(answer => answer.Name == AnswerNameBox.Text).FirstOrDefault() ?? new();
+                bool isNewAnswer = !answers.Where(answer => answer.Question == questionOn).Where(answer => answer.Name == AnswerNameBox.Text).Any();
+                Answer answer = answers.Where(answer => answer.Question == questionOn).Where(answer => answer.Name == AnswerNameBox.Text).FirstOrDefault() ?? new();
                 answer.Survey = survey;
                 answer.Question = questionOn;
                 answer.Name = AnswerNameBox.Text;
@@ -154,6 +223,7 @@ namespace Questionnaire.Forms
                     AnswerListBox.Items.Add(answerOn.Name);
                 }
                 AnswerListBox.Text = answer.Name;
+                AnswerUpdateBox.Text = answer.Name;
             }
         }
 
@@ -172,8 +242,10 @@ namespace Questionnaire.Forms
                 }
                 QuestionLabel.Text = QuestionNameBox.Text;
                 IsTrueAnswerBox.Checked = false;
+                AnswerSearchBox.Text = string.Empty;
                 AnswerNameBox.Text = string.Empty;
-                AnswerBallBox.Text = string.Empty;
+                AnswerBallBox.Text = "0";
+                AnswerUpdateBox.Text = string.Empty;
             }
         }
 
@@ -181,7 +253,7 @@ namespace Questionnaire.Forms
         {
             if (AnswerListBox.Text != string.Empty)
             {
-                Answer answerOn = answers.Where(answer => answer.Name == AnswerListBox.Text).First();
+                Answer answerOn = answers.Where(answer => answer.Name == AnswerListBox.Text && answer.Question == questionOn).First();
                 AnswerUpdateBox.Text = answerOn.Name;
                 QuestionLabel.Text = answerOn.Question.Name;
                 AnswerNameBox.Text = answerOn.Name;
@@ -194,7 +266,7 @@ namespace Questionnaire.Forms
         {
             if (QuestionNameBox.Text != string.Empty && QuestionUpdateBox.Text != string.Empty && QuestionNameBox.Text != QuestionUpdateBox.Text && !questions.Where(question => question.Name == QuestionUpdateBox.Text).Any())
             {
-                Question questionOn = questions.Where(question => question.Name == QuestionNameBox.Text).First();
+                Question questionOn = questions.Where(question => question == this.questionOn).First();
                 questionOn.Name = QuestionUpdateBox.Text;
                 QuestionNameBox.Text = QuestionUpdateBox.Text;
                 QuestionListBox.Items.Clear();
@@ -203,6 +275,7 @@ namespace Questionnaire.Forms
                     QuestionListBox.Items.Add(question.Name);
                 }
                 QuestionLabel.Text = questionOn.Name;
+                AnswerSearchBox.Text = string.Empty;
                 AnswerListBox.Items.Clear();
                 foreach (var answer in answers.Where(answer => answer.Question == this.questionOn))
                 {
@@ -215,8 +288,9 @@ namespace Questionnaire.Forms
         {
             if (AnswerNameBox.Text != string.Empty && AnswerUpdateBox.Text != string.Empty && AnswerNameBox.Text != AnswerUpdateBox.Text && !answers.Where(answer => answer.Question.Name == QuestionLabel.Text && answer.Name == AnswerUpdateBox.Text).Any())
             {
-                Answer answerOn = answers.Where(answer => answer.Question.Name == QuestionLabel.Text && answer.Name == AnswerNameBox.Text).First();
+                Answer answerOn = answers.Where(answer => answer.Question == questionOn && answer.Name == AnswerNameBox.Text).First();
                 answerOn.Name = AnswerUpdateBox.Text;
+                AnswerSearchBox.Text = string.Empty;
                 AnswerListBox.Items.Clear();
                 foreach (var answer in answers.Where(answer => answer.Question == questionOn))
                 {

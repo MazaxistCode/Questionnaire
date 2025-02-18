@@ -1,4 +1,5 @@
 ﻿using Questionnaire.DB;
+using Questionnaire.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -55,9 +56,45 @@ namespace Questionnaire
             Visible = true;
         }
 
-        private void CreateButton_Click(object sender, EventArgs e)
+        private void CreateSurveyButton_Click(object sender, EventArgs e)
         {
+            CreateSurveyForm createSurveyForm = new(UserEmail);
+            Visible = false;
+            createSurveyForm.Location = Location;
+            createSurveyForm.ShowDialog();
+            UserSurveiesForm userSurveiesForm = new(UserEmail);
+            userSurveiesForm.Location = createSurveyForm.Location;
+            userSurveiesForm.ShowDialog();
+            Location = userSurveiesForm.Location;
+            Visible = true;
+            using (Context context = new())
+            {
+                SearchBox.Text = string.Empty;
+                SurveiesListBox.Items.Clear();
+                foreach (var survey in context.Surveies)
+                {
+                    SurveiesListBox.Items.Add(survey.Name);
+                }
+            }
+        }
 
+        private void UserSurveiesButton_Click(object sender, EventArgs e)
+        {
+            UserSurveiesForm userSurveiesForm = new(UserEmail);
+            Visible = false;
+            userSurveiesForm.Location = Location;
+            userSurveiesForm.ShowDialog();
+            Location = userSurveiesForm.Location;
+            Visible = true;
+            using (Context context = new())
+            {
+                SearchBox.Text = string.Empty;
+                SurveiesListBox.Items.Clear();
+                foreach (var survey in context.Surveies)
+                {
+                    SurveiesListBox.Items.Add(survey.Name);
+                }
+            }
         }
     }
 }
