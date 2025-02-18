@@ -66,14 +66,37 @@ namespace Questionnaire.Forms
                     if (IsEdit)
                     {
                         survey.Ball = maxBall;
-                        Question[] oldDB = context.Questions.Where(question => question.SurveyId == survey.Id).ToArray();
-                        foreach (var question in oldDB)
+                        Question[] oldDBQuestions = context.Questions.Where(question => question.SurveyId == survey.Id).ToArray();
+                        Answer[] oldDBAnswers = context.Answers.Where(answer => answer.SurveyId == survey.Id).ToArray();
+                        foreach (var oldQuestion in oldDBQuestions)
                         {
-                            foreach (var oldQuestion in questions)
+                            Question? editQuestion = questions.Where(question => question == oldQuestion).FirstOrDefault();
+                            if(editQuestion is not null)
                             {
-                                
+                                oldQuestion.Name = editQuestion.Name;
+                                questions.Remove(editQuestion);
+                                Answer[] newAnswers = answers.Where(answer => answer.Question == oldQuestion).ToArray();
+
+                                context.SaveChanges();
+                            }
+                            else
+                            {
+
                             }
                         }
+                        foreach (var oldQuestion in oldDBQuestions)
+                        {
+                            foreach (var question in questions)
+                            {
+                                if (oldQuestion == question)
+                                {
+                                    oldQuestion.Name = question.Name;
+                                    questions.Remove(question);
+                                    context.SaveChanges();
+                                }
+                            }
+                        }
+
                         foreach (var questionOn in questions)
                         {
                             Question? DBQuestion = context.Questions.Where(question => question.SurveyId == survey.Id).Where(question => question.Id == questionOn.Id).FirstOrDefault();
