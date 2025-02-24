@@ -137,7 +137,7 @@
             groupBox1.Size = new Size(358, 364);
             groupBox1.TabIndex = 35;
             groupBox1.TabStop = false;
-            groupBox1.Text = "ОТВЫТЫ";
+            groupBox1.Text = "ОТВЕТЫ";
             // 
             // AnswerBallBox
             // 
