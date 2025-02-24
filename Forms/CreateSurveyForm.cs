@@ -55,73 +55,100 @@ namespace Questionnaire.Forms
         {
             using (Context context = new())
             {
-                if (questions.Any() && answers.Any() && questions.Where(question =>
-                answers.Where(answer => answer.Question == question).Any()).Count() == questions.Count() &&
-                SurveyNameBox.Text != string.Empty &&
-                    !context.Surveies.Where(survey => survey.Name == SurveyNameBox.Text).Any())
+                if (IsEdit)
                 {
-                    int maxBall = 0;
-                    foreach (var answer in answers)
-                        maxBall += answer.Ball;
-                    if (IsEdit)
+                    if (questions.Any() && answers.Any() && questions.Where(question =>
+                        answers.Where(answer => answer.Question == question).Any()).Count() == questions.Count() &&
+                        context.Surveies.Where(survey => survey.Name == SurveyNameBox.Text).Any())
                     {
+                        int maxBall = 0;
+                        foreach (var answer in answers)
+                            maxBall += answer.Ball;
                         survey.Ball = maxBall;
-                        Question[] oldDBQuestions = context.Questions.Where(question => question.SurveyId == survey.Id).ToArray();
-                        Answer[] oldDBAnswers = context.Answers.Where(answer => answer.SurveyId == survey.Id).ToArray();
-                        foreach (var oldQuestion in oldDBQuestions)
+                        context.Surveies.Update(survey);
+                        context.SaveChanges();
+                        List<Question> allOldDBQuestions = context.Questions.Where(question => question.SurveyId == survey.Id).ToList();
+                        List<Question> oldDBQuestions = context.Questions.Where(question => question.SurveyId == survey.Id).ToList();
+                        List<Answer> oldDBAnswers = context.Answers.Where(answer => answer.SurveyId == survey.Id).ToList();
+                        List<Answer> deletedAnswers = [];
+                        foreach (var oldQuestion in allOldDBQuestions)
                         {
-                            Question? editQuestion = questions.Where(question => question == oldQuestion).FirstOrDefault();
-                            if(editQuestion is not null)
+                            Question? editQuestion = questions.Where(question => question.Id == oldQuestion.Id).FirstOrDefault();
+                            if (editQuestion is not null)
                             {
                                 oldQuestion.Name = editQuestion.Name;
+                                context.Update(oldQuestion);
                                 questions.Remove(editQuestion);
-                                Answer[] newAnswers = answers.Where(answer => answer.Question == oldQuestion).ToArray();
-
-                                context.SaveChanges();
                             }
                             else
                             {
-
+                                deletedAnswers.AddRange(oldDBAnswers.Where(answer => answer.QuestionId == oldQuestion.Id).ToList());
+                                context.Questions.Remove(oldQuestion);
+                                oldDBQuestions.Remove(oldQuestion);
                             }
                         }
+                        foreach (var deletedAnswer in deletedAnswers)
+                            answers.Remove(deletedAnswer);
+                        context.Answers.RemoveRange(deletedAnswers);
+                        context.Questions.AddRange(questions);
+                        context.SaveChanges();
                         foreach (var oldQuestion in oldDBQuestions)
                         {
-                            foreach (var question in questions)
+                            List<Answer> oldQuestionAnswers = oldDBAnswers.Where(oldAnswer => oldAnswer.Question.Id == oldQuestion.Id).ToList();
+                            List<Answer> questionAnswers = answers.Where(answer => answer.QuestionId == oldQuestion.Id || answer.Question.Name == oldQuestion.Name).ToList();
+                            foreach(var oldAnswer in oldQuestionAnswers)
                             {
-                                if (oldQuestion == question)
+                                Answer? editAnswer = questionAnswers.Where(answer => answer.Id == oldAnswer.Id).FirstOrDefault();
+                                if (editAnswer is not null)
                                 {
-                                    oldQuestion.Name = question.Name;
-                                    questions.Remove(question);
-                                    context.SaveChanges();
+                                    oldAnswer.Name = editAnswer.Name;
+                                    oldAnswer.Ball = editAnswer.Ball;
+                                    oldAnswer.IsTrue = editAnswer.IsTrue;
+                                    context.Answers.Update(oldAnswer);
+                                    answers.Remove(editAnswer);
+                                    questionAnswers.Remove(editAnswer);
+                                }
+                                else
+                                {
+                                    context.Answers.Remove(oldAnswer);
+                                    answers.Remove(oldAnswer);
+                                    questionAnswers.Remove(oldAnswer);
                                 }
                             }
+                            context.Answers.AddRange(questionAnswers);
+                            //foreach (var answer in questionAnswers)
+                            //    context.Answers.Add(new()
+                            //    {
+                            //        Ball = answer.Ball,
+                            //        Name = answer.Name,
+                            //        IsTrue = answer.IsTrue,
+                            //        QuestionId = answer.Question.Id,
+                            //        SurveyId = answer.Question.SurveyId
+                            //    });
                         }
-
-                        foreach (var questionOn in questions)
-                        {
-                            Question? DBQuestion = context.Questions.Where(question => question.SurveyId == survey.Id).Where(question => question.Id == questionOn.Id).FirstOrDefault();
-                            if (DBQuestion is not null)
-                            {
-                                DBQuestion.Name = questionOn.Name;
-                            }
-                            else
-                            {
-
-                            }
-                        }
+                        context.Answers.AddRange(answers);
                     }
-                    else
+                }
+                else
+                {
+                    if (questions.Any() && answers.Any() && questions.Where(question =>
+                        answers.Where(answer => answer.Question == question).Any()).Count() == questions.Count() &&
+                        SurveyNameBox.Text != string.Empty &&
+                        !context.Surveies.Where(survey => survey.Name == SurveyNameBox.Text).Any())
                     {
+                        int maxBall = 0;
+                        foreach (var answer in answers)
+                            maxBall += answer.Ball;
                         survey.User = context.Users.Where(user => user.Email == UserEmail).First();
                         survey.Ball = maxBall;
                         survey.Name = SurveyNameBox.Text;
                         context.Surveies.Add(survey);
-                        context.Questions.AddRange([.. questions]);
-                        context.Answers.AddRange([.. answers]);
+                        context.Questions.AddRange(questions);
+                        context.Answers.AddRange(answers);
                     }
-                    context.SaveChanges();
-                    Close();
                 }
+                context.SaveChanges();
+                Close();
             }
         }
 
@@ -165,7 +192,7 @@ namespace Questionnaire.Forms
         {
             if (QuestionNameBox.Text != string.Empty && questions.Where(question => question.Name == QuestionNameBox.Text).Any())
             {
-                foreach (var answer in answers.Where(answer => answer.Question == questions.Where(question => question.Name == QuestionNameBox.Text).First()).ToList())
+                foreach (var answer in answers.Where(answer => answer.QuestionId == questions.First(question => question.Name == QuestionNameBox.Text).Id).ToList())
                     answers.Remove(answer);
                 questions.Remove(questionOn);
                 QuestionListBox.Items.Clear();
@@ -173,12 +200,9 @@ namespace Questionnaire.Forms
                 {
                     QuestionListBox.Items.Add(question.Name);
                 }
+                questionOn = new();
                 AnswerSearchBox.Text = string.Empty;
                 AnswerListBox.Items.Clear();
-                foreach (var answer in answers.Where(answer => answer.Question == questionOn))
-                {
-                    AnswerListBox.Items.Add(answer.Name);
-                }
                 QuestionLabel.Text = "ВОПРОС";
                 IsTrueAnswerBox.Checked = false;
                 AnswerNameBox.Text = string.Empty;
@@ -309,7 +333,7 @@ namespace Questionnaire.Forms
 
         private void AnswerUpdateButton_Click(object sender, EventArgs e)
         {
-            if (AnswerNameBox.Text != string.Empty && AnswerUpdateBox.Text != string.Empty && AnswerNameBox.Text != AnswerUpdateBox.Text && !answers.Where(answer => answer.Question.Name == QuestionLabel.Text && answer.Name == AnswerUpdateBox.Text).Any())
+            if (AnswerNameBox.Text != string.Empty && AnswerUpdateBox.Text != string.Empty && AnswerNameBox.Text != AnswerUpdateBox.Text && !answers.Where(answer => answer.Question == questionOn).Any(answer => answer.Name == AnswerUpdateBox.Text))
             {
                 Answer answerOn = answers.Where(answer => answer.Question == questionOn && answer.Name == AnswerNameBox.Text).First();
                 answerOn.Name = AnswerUpdateBox.Text;

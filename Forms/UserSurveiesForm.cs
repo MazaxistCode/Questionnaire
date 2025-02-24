@@ -68,7 +68,7 @@ namespace Questionnaire.Forms
                 CreateSurveyForm form;
                 using (Context context = new())
                 {
-                    form = new(UserEmail, context.Surveies.Where(survey => survey.Name == SurveiesListBox.Text).First());
+                    form = new(UserEmail, context.Surveies.First(survey => survey.Name == SurveiesListBox.Text));
                 }
                 Visible = false;
                 form.Location = Location;
