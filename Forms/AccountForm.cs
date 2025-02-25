@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Questionnaire
+namespace Questionnaire.Forms
 {
     public partial class AccountForm : Form
     {

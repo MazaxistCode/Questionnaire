@@ -106,27 +106,24 @@ namespace Questionnaire.Forms
                                     oldAnswer.IsTrue = editAnswer.IsTrue;
                                     context.Answers.Update(oldAnswer);
                                     answers.Remove(editAnswer);
-                                    questionAnswers.Remove(editAnswer);
                                 }
                                 else
                                 {
                                     context.Answers.Remove(oldAnswer);
                                     answers.Remove(oldAnswer);
-                                    questionAnswers.Remove(oldAnswer);
                                 }
                             }
-                            context.Answers.AddRange(questionAnswers);
-                            //foreach (var answer in questionAnswers)
-                            //    context.Answers.Add(new()
-                            //    {
-                            //        Ball = answer.Ball,
-                            //        Name = answer.Name,
-                            //        IsTrue = answer.IsTrue,
-                            //        QuestionId = answer.Question.Id,
-                            //        SurveyId = answer.Question.SurveyId
-                            //    });
+
                         }
-                        context.Answers.AddRange(answers);
+                        foreach (var answer in answers)
+                            context.Answers.Add(new()
+                            {
+                                Ball = answer.Ball,
+                                Name = answer.Name,
+                                IsTrue = answer.IsTrue,
+                                QuestionId = answer.Question.Id,
+                                SurveyId = answer.Question.SurveyId
+                            });
                     }
                 }
                 else
