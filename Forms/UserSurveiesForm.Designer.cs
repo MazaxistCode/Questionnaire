@@ -31,7 +31,7 @@
             panel1 = new Panel();
             SearchBox = new TextBox();
             SearchButton = new Button();
-            AccountButton = new Button();
+            DeleteSurveyButton = new Button();
             EditSurveyButton = new Button();
             button2 = new Button();
             CreateSurveyButton = new Button();
@@ -44,7 +44,7 @@
             panel1.BackColor = Color.DodgerBlue;
             panel1.Controls.Add(SearchBox);
             panel1.Controls.Add(SearchButton);
-            panel1.Controls.Add(AccountButton);
+            panel1.Controls.Add(DeleteSurveyButton);
             panel1.Controls.Add(EditSurveyButton);
             panel1.Controls.Add(button2);
             panel1.Controls.Add(CreateSurveyButton);
@@ -78,19 +78,20 @@
             SearchButton.UseVisualStyleBackColor = false;
             SearchButton.Click += SearchButton_Click;
             // 
-            // AccountButton
+            // DeleteSurveyButton
             // 
-            AccountButton.BackColor = Color.DeepSkyBlue;
-            AccountButton.FlatAppearance.BorderSize = 0;
-            AccountButton.FlatStyle = FlatStyle.Flat;
-            AccountButton.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold);
-            AccountButton.ForeColor = Color.White;
-            AccountButton.Location = new Point(484, 305);
-            AccountButton.Name = "AccountButton";
-            AccountButton.Size = new Size(232, 81);
-            AccountButton.TabIndex = 4;
-            AccountButton.Text = "Удалить опрос";
-            AccountButton.UseVisualStyleBackColor = false;
+            DeleteSurveyButton.BackColor = Color.DeepSkyBlue;
+            DeleteSurveyButton.FlatAppearance.BorderSize = 0;
+            DeleteSurveyButton.FlatStyle = FlatStyle.Flat;
+            DeleteSurveyButton.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold);
+            DeleteSurveyButton.ForeColor = Color.White;
+            DeleteSurveyButton.Location = new Point(484, 305);
+            DeleteSurveyButton.Name = "DeleteSurveyButton";
+            DeleteSurveyButton.Size = new Size(232, 81);
+            DeleteSurveyButton.TabIndex = 4;
+            DeleteSurveyButton.Text = "Удалить опрос";
+            DeleteSurveyButton.UseVisualStyleBackColor = false;
+            DeleteSurveyButton.Click += DeleteSurveyButton_Click;
             // 
             // EditSurveyButton
             // 
@@ -171,7 +172,7 @@
         private Panel panel1;
         private TextBox SearchBox;
         private Button SearchButton;
-        private Button AccountButton;
+        private Button DeleteSurveyButton;
         private Button EditSurveyButton;
         private Button button2;
         private Button CreateSurveyButton;
