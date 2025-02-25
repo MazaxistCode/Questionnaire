@@ -8,7 +8,7 @@ using System.Drawing.Drawing2D;
 using Questionnaire.DB;
 using Questionnaire.Forms;
 
-namespace Questionnaire
+namespace Questionnaire.Forms
 {
     public partial class LogInForm : Form
     {

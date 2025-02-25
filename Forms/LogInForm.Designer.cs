@@ -1,4 +1,4 @@
-﻿namespace Questionnaire
+﻿namespace Questionnaire.Forms
 {
     partial class LogInForm
     {
