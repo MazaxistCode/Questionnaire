@@ -86,5 +86,22 @@ namespace Questionnaire.Forms
                 }
             }
         }
+
+        private void DeleteSurveyButton_Click(object sender, EventArgs e)
+        {
+            if (SurveiesListBox.Text != string.Empty)
+            {
+                using (Context context = new())
+                {
+                    Survey survey = context.Surveies.First(survey => survey.Name == SurveiesListBox.Text);
+                    List<Question> questions = context.Questions.Where(question => question.SurveyId == survey.Id).ToList();
+                    List<Answer> answers = context.Answers.Where(answer => answer.SurveyId == survey.Id).ToList();
+                    context.Answers.RemoveRange(answers);
+                    context.Questions.RemoveRange(questions);
+                    context.Surveies.RemoveRange(survey);
+                    context.SaveChanges();
+                }
+            }
+        }
     }
 }

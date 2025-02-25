@@ -34,7 +34,7 @@
             SearchButton = new Button();
             AccountButton = new Button();
             UserSurveiesButton = new Button();
-            button2 = new Button();
+            OpenSurveyButton = new Button();
             CreateSurveyButton = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -57,7 +57,7 @@
             panel1.Controls.Add(SearchButton);
             panel1.Controls.Add(AccountButton);
             panel1.Controls.Add(UserSurveiesButton);
-            panel1.Controls.Add(button2);
+            panel1.Controls.Add(OpenSurveyButton);
             panel1.Controls.Add(CreateSurveyButton);
             panel1.Controls.Add(SurveiesListBox);
             panel1.Location = new Point(12, 12);
@@ -119,19 +119,20 @@
             UserSurveiesButton.UseVisualStyleBackColor = false;
             UserSurveiesButton.Click += UserSurveiesButton_Click;
             // 
-            // button2
+            // OpenSurveyButton
             // 
-            button2.BackColor = Color.DeepSkyBlue;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(484, 44);
-            button2.Name = "button2";
-            button2.Size = new Size(232, 81);
-            button2.TabIndex = 2;
-            button2.Text = "Открыть опрос";
-            button2.UseVisualStyleBackColor = false;
+            OpenSurveyButton.BackColor = Color.DeepSkyBlue;
+            OpenSurveyButton.FlatAppearance.BorderSize = 0;
+            OpenSurveyButton.FlatStyle = FlatStyle.Flat;
+            OpenSurveyButton.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold);
+            OpenSurveyButton.ForeColor = Color.White;
+            OpenSurveyButton.Location = new Point(484, 44);
+            OpenSurveyButton.Name = "OpenSurveyButton";
+            OpenSurveyButton.Size = new Size(232, 81);
+            OpenSurveyButton.TabIndex = 2;
+            OpenSurveyButton.Text = "Открыть опрос";
+            OpenSurveyButton.UseVisualStyleBackColor = false;
+            OpenSurveyButton.Click += OpenSurveyButton_Click;
             // 
             // CreateSurveyButton
             // 
@@ -172,7 +173,7 @@
         private ListBox SurveiesListBox;
         private Panel panel1;
         private Button UserSurveiesButton;
-        private Button button2;
+        private Button OpenSurveyButton;
         private Button CreateSurveyButton;
         private Button AccountButton;
         private TextBox SearchBox;
