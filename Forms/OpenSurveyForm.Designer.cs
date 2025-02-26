@@ -67,7 +67,7 @@
             // 
             // QuestionLabel
             // 
-            QuestionLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
+            QuestionLabel.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             QuestionLabel.ForeColor = Color.White;
             QuestionLabel.Location = new Point(418, 24);
             QuestionLabel.Name = "QuestionLabel";

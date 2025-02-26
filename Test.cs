@@ -84,7 +84,8 @@ namespace Questionnaire
             {
                 text +=
                     user.Id + "   " +
-                    user.SurveyId
+                    user.SurveyId + "   " +
+                    user.UserId
                     + "\n";
             }
             label6.Text = text;
@@ -94,6 +95,7 @@ namespace Questionnaire
                 text +=
                     user.Id + "   " +
                     user.AnswerSurveyId + "   " +
+                    user.QuestionId + "   " +
                     user.AnswerId
                     + "\n";
             }
