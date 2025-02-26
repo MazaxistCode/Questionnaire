@@ -69,9 +69,9 @@ namespace Questionnaire.Forms
                     context.Questions.AddRange(question1_1);
                     context.SaveChanges();
 
-                    Answer answer1_1_1 = new() { Name = "T", IsTrue = true, Question = question1_1 };
-                    Answer answer1_1_2 = new() { Name = "F", Question = question1_1 };
-                    Answer answer1_1_3 = new() { Name = "NS", Question = question1_1 };
+                    Answer answer1_1_1 = new() { Name = "T", IsTrue = true, Question = question1_1, Survey = survey1 };
+                    Answer answer1_1_2 = new() { Name = "F", Question = question1_1, Survey = survey1 };
+                    Answer answer1_1_3 = new() { Name = "NS", Question = question1_1, Survey = survey1 };
                     context.Answers.AddRange(answer1_1_1, answer1_1_2, answer1_1_3);
                     context.SaveChanges();
 
@@ -79,9 +79,9 @@ namespace Questionnaire.Forms
                     context.Questions.AddRange(question1_2);
                     context.SaveChanges();
 
-                    Answer answer1_2_1 = new() { Name = "T", Question = question1_2 };
-                    Answer answer1_2_2 = new() { Name = "F", IsTrue = true, Question = question1_2 };
-                    Answer answer1_2_3 = new() { Name = "NS", Question = question1_2 };
+                    Answer answer1_2_1 = new() { Name = "T", Question = question1_2, Survey = survey1 };
+                    Answer answer1_2_2 = new() { Name = "F", IsTrue = true, Question = question1_2, Survey = survey1 };
+                    Answer answer1_2_3 = new() { Name = "NS", Question = question1_2, Survey = survey1 };
                     context.Answers.AddRange(answer1_2_1, answer1_2_2, answer1_2_3);
                     context.SaveChanges();
 
@@ -89,10 +89,14 @@ namespace Questionnaire.Forms
                     context.Questions.AddRange(question1_3);
                     context.SaveChanges();
 
-                    Answer answer1_3_1 = new() { Name = "T", Question = question1_3 };
-                    Answer answer1_3_2 = new() { Name = "F", Question = question1_3 };
-                    Answer answer1_3_3 = new() { Name = "NS", IsTrue = true, Question = question1_3 };
+                    Answer answer1_3_1 = new() { Name = "T", Question = question1_3, Survey = survey1 };
+                    Answer answer1_3_2 = new() { Name = "F", Question = question1_3, Survey = survey1 };
+                    Answer answer1_3_3 = new() { Name = "NS", IsTrue = true, Question = question1_3, Survey = survey1 };
                     context.Answers.AddRange(answer1_3_1, answer1_3_2, answer1_3_3);
+                    context.SaveChanges();
+
+                    Answer empty = new() { Name = "Не найден" };
+                    context.Answers.Add(empty);
                     context.SaveChanges();
                 }
                 using (Context context = new())

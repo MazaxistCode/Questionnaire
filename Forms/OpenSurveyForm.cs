@@ -51,7 +51,7 @@ namespace Questionnaire.Forms
         {
             if (QuestionOn != null && AnswersListBox.Text != string.Empty)
             {
-                Answer answer = answers.First(answer => answer.Name == AnswersListBox.Text);
+                Answer answer = answers.First(answer => answer.Name == AnswersListBox.Text && answer.QuestionId == QuestionOn.Id);
                 answerQuestions[Array.IndexOf(answerQuestions, answerQuestions.First(answerQuestion => answerQuestion.Question.Id == QuestionOn.Id))].Answer = answer;
                 int index = QuestionsListBox.SelectedIndex;
                 if (index < QuestionsListBox.Items.Count - 1)
@@ -78,12 +78,20 @@ namespace Questionnaire.Forms
         {
             using(Context context = new())
             {
-                if(!answerQuestions.Any(answerQuestion => answerQuestion.Answer == null))
-                context.AnswerSurveies.Add(new() { Survey = context.Surveies.Find(AnswerSurvey.Survey.Id), User = context.Users.Find(AnswerSurvey.User.Id) });
-                context.SaveChanges();
-                foreach (var answerQuestion in answerQuestions)
-                    context.AnswerQuestions.Add(new() { AnswerSurvey = context.AnswerSurveies.Find(answerQuestion.AnswerSurvey.SurveyId, answerQuestion.AnswerSurvey.UserId), Question = context.Questions.Find(answerQuestion.Question.Id), Answer = context.Answers.Find(answerQuestion.Answer.Id) });
-                context.SaveChanges();
+                if (!answerQuestions.Any(answerQuestion => answerQuestion.Answer == null))
+                {
+                    context.AnswerSurveies.Add(new() { Survey = context.Surveies.First(survey => survey.Id == Survey.Id), User = context.Users.First(user => user.Id == User.Id) });
+                    context.SaveChanges();
+                    AnswerSurvey = context.AnswerSurveies.First(answerSurvey => answerSurvey.SurveyId == Survey.Id && answerSurvey.UserId == User.Id);
+                    foreach (var answerQuestion in answerQuestions)
+                        context.AnswerQuestions.Add(new()
+                        {
+                            AnswerSurvey = context.AnswerSurveies.First(answerSurvey => answerSurvey.SurveyId == Survey.Id && answerSurvey.UserId == User.Id),
+                            Question = context.Questions.First(question => question.Id == answerQuestion.Question.Id),
+                            Answer = context.Answers.First(answer => answer.Id == answerQuestion.Answer.Id)
+                        });
+                    context.SaveChanges();
+                }
             }
         }
     }
