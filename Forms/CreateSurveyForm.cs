@@ -257,7 +257,7 @@ namespace Questionnaire.Forms
                 answer.Survey = survey;
                 answer.Question = questionOn;
                 answer.Name = AnswerNameBox.Text;
-                answer.Ball = int.Parse(AnswerBallBox.Text);
+                answer.Ball = int.TryParse(AnswerBallBox.Text, out int ball) ? ball : 0;
                 answer.IsTrue = IsTrueAnswerBox.Checked;
                 if (isNewAnswer)
                     answers.Add(answer);
@@ -266,8 +266,10 @@ namespace Questionnaire.Forms
                 {
                     AnswerListBox.Items.Add(answerOn.Name);
                 }
-                AnswerListBox.Text = answer.Name;
-                AnswerUpdateBox.Text = answer.Name;
+                IsTrueAnswerBox.Checked = false;
+                AnswerBallBox.Value = 0;
+                AnswerNameBox.Text = string.Empty;
+                AnswerUpdateBox.Text = string.Empty;
             }
         }
 

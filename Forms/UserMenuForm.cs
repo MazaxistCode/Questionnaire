@@ -98,7 +98,15 @@ namespace Questionnaire.Forms
 
         private void OpenSurveyButton_Click(object sender, EventArgs e)
         {
-
+            if (SurveiesListBox.Text != string.Empty) 
+            {
+                OpenSurveyForm openSurveyForm = new(SurveiesListBox.Text, UserEmail);
+                Visible = false;
+                openSurveyForm.Location = Location;
+                openSurveyForm.ShowDialog();
+                Location = openSurveyForm.Location;
+                Visible = true;
+            }
         }
     }
 }
