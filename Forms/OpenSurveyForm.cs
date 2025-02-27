@@ -91,6 +91,17 @@ namespace Questionnaire.Forms
                             Answer = context.Answers.First(answer => answer.Id == answerQuestion.Answer.Id)
                         });
                     context.SaveChanges();
+                    UserResultForm form = new(Survey.Name, User.Email);
+                    Visible = false;
+                    form.Location = Location;
+                    form.ShowDialog();
+                    Location = form.Location;
+                    Visible = true;
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Ответьте на все вопросы.");
                 }
             }
         }

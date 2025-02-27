@@ -295,7 +295,7 @@
             AddAnswerButton.Name = "AddAnswerButton";
             AddAnswerButton.Size = new Size(159, 23);
             AddAnswerButton.TabIndex = 7;
-            AddAnswerButton.Text = "ДОБАВИТЬ / ПРИМЕНИТЬ";
+            AddAnswerButton.Text = "ДОБАВИТЬ";
             AddAnswerButton.UseVisualStyleBackColor = false;
             AddAnswerButton.Click += AddAnswerButton_Click;
             // 

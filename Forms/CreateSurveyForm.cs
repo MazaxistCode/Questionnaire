@@ -250,7 +250,7 @@ namespace Questionnaire.Forms
 
         private void AddAnswerButton_Click(object sender, EventArgs e)
         {
-            if (AnswerNameBox.Text != string.Empty && questions.Where(question => question.Name == QuestionLabel.Text).Any())
+            if (AnswerNameBox.Text != string.Empty && questions.Where(question => question.Name == QuestionLabel.Text).Any() && answers.Any(answer => AnswerListBox.Items.Contains(answer.Name)))
             {
                 bool isNewAnswer = !answers.Where(answer => answer.Question == questionOn).Where(answer => answer.Name == AnswerNameBox.Text).Any();
                 Answer answer = answers.Where(answer => answer.Question == questionOn).Where(answer => answer.Name == AnswerNameBox.Text).FirstOrDefault() ?? new();
@@ -336,6 +336,8 @@ namespace Questionnaire.Forms
             {
                 Answer answerOn = answers.Where(answer => answer.Question == questionOn && answer.Name == AnswerNameBox.Text).First();
                 answerOn.Name = AnswerUpdateBox.Text;
+                answerOn.IsTrue = IsTrueAnswerBox.Checked;
+                answerOn.Ball = int.TryParse(AnswerBallBox.Text, out int ball) ? ball : 0;
                 AnswerSearchBox.Text = string.Empty;
                 AnswerListBox.Items.Clear();
                 foreach (var answer in answers.Where(answer => answer.Question == questionOn))
