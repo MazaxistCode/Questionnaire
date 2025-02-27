@@ -98,14 +98,32 @@ namespace Questionnaire.Forms
 
         private void OpenSurveyButton_Click(object sender, EventArgs e)
         {
-            if (SurveiesListBox.Text != string.Empty) 
+            if (SurveiesListBox.Text != string.Empty)
             {
-                OpenSurveyForm openSurveyForm = new(SurveiesListBox.Text, UserEmail);
-                Visible = false;
-                openSurveyForm.Location = Location;
-                openSurveyForm.ShowDialog();
-                Location = openSurveyForm.Location;
-                Visible = true;
+                using(Context context = new())
+                {
+                    User user = context.Users.First(user => user.Email == UserEmail);
+                    Survey survey = context.Surveies.First(survey => survey.Name == SurveiesListBox.Text);
+                    if(!context.AnswerSurveies.Any(answerSurvey => answerSurvey.UserId == user.Id && answerSurvey.SurveyId == survey.Id))
+                    {
+                        OpenSurveyForm openSurveyForm = new(SurveiesListBox.Text, UserEmail);
+                        Visible = false;
+                        openSurveyForm.Location = Location;
+                        openSurveyForm.ShowDialog();
+                        Location = openSurveyForm.Location;
+                        Visible = true;
+                    }
+                    else
+                    {
+                        UserResultForm form = new(survey.Name, user.Email);
+                        Visible = false;
+                        form.Location = Location;
+                        form.ShowDialog();
+                        Location = form.Location;
+                        Visible = true;
+                        Close();
+                    }
+                }
             }
         }
     }
