@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            QuestionCountLabel = new Label();
             EndButton = new Button();
             QuestionLabel = new Label();
             AnswerButton = new Button();
@@ -40,6 +41,7 @@
             // panel1
             // 
             panel1.BackColor = Color.DodgerBlue;
+            panel1.Controls.Add(QuestionCountLabel);
             panel1.Controls.Add(EndButton);
             panel1.Controls.Add(QuestionLabel);
             panel1.Controls.Add(AnswerButton);
@@ -49,6 +51,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(760, 437);
             panel1.TabIndex = 2;
+            // 
+            // QuestionCountLabel
+            // 
+            QuestionCountLabel.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            QuestionCountLabel.ForeColor = Color.White;
+            QuestionCountLabel.Location = new Point(22, 24);
+            QuestionCountLabel.Name = "QuestionCountLabel";
+            QuestionCountLabel.Size = new Size(374, 29);
+            QuestionCountLabel.TabIndex = 29;
+            QuestionCountLabel.Text = "Ответил/всего";
+            QuestionCountLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // EndButton
             // 
@@ -95,22 +108,23 @@
             // 
             AnswersListBox.BackColor = Color.DeepSkyBlue;
             AnswersListBox.BorderStyle = BorderStyle.None;
-            AnswersListBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            AnswersListBox.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
             AnswersListBox.ForeColor = Color.White;
-            AnswersListBox.Location = new Point(418, 84);
+            AnswersListBox.Location = new Point(418, 82);
             AnswersListBox.Name = "AnswersListBox";
-            AnswersListBox.Size = new Size(320, 240);
+            AnswersListBox.Size = new Size(320, 242);
             AnswersListBox.TabIndex = 6;
             // 
             // QuestionsListBox
             // 
+            QuestionsListBox.Anchor = AnchorStyles.None;
             QuestionsListBox.BackColor = Color.DeepSkyBlue;
             QuestionsListBox.BorderStyle = BorderStyle.None;
-            QuestionsListBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            QuestionsListBox.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold);
             QuestionsListBox.ForeColor = Color.White;
-            QuestionsListBox.Location = new Point(23, 24);
+            QuestionsListBox.Location = new Point(22, 56);
             QuestionsListBox.Name = "QuestionsListBox";
-            QuestionsListBox.Size = new Size(374, 384);
+            QuestionsListBox.Size = new Size(374, 352);
             QuestionsListBox.TabIndex = 5;
             QuestionsListBox.SelectedIndexChanged += QuestionsListBox_SelectedIndexChanged;
             // 
@@ -139,5 +153,6 @@
         private Button AnswerButton;
         private Label QuestionLabel;
         private Button EndButton;
+        private Label QuestionCountLabel;
     }
 }

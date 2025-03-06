@@ -43,11 +43,11 @@
             // 
             SurveiesListBox.BackColor = Color.DeepSkyBlue;
             SurveiesListBox.BorderStyle = BorderStyle.None;
-            SurveiesListBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            SurveiesListBox.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             SurveiesListBox.ForeColor = Color.White;
             SurveiesListBox.Location = new Point(28, 65);
             SurveiesListBox.Name = "SurveiesListBox";
-            SurveiesListBox.Size = new Size(411, 336);
+            SurveiesListBox.Size = new Size(411, 330);
             SurveiesListBox.TabIndex = 0;
             // 
             // panel1

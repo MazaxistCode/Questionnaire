@@ -40,7 +40,6 @@
             QuestionLabel = new Label();
             QuestionOnLabel = new Label();
             AnswerBallLabel = new Label();
-            IsTrueAnswerBox = new CheckBox();
             AnswerNameLabel = new Label();
             AnswerNameBox = new TextBox();
             AnswerListBox = new ListBox();
@@ -122,7 +121,6 @@
             groupBox1.Controls.Add(QuestionLabel);
             groupBox1.Controls.Add(QuestionOnLabel);
             groupBox1.Controls.Add(AnswerBallLabel);
-            groupBox1.Controls.Add(IsTrueAnswerBox);
             groupBox1.Controls.Add(AnswerNameLabel);
             groupBox1.Controls.Add(AnswerNameBox);
             groupBox1.Controls.Add(AnswerListBox);
@@ -144,7 +142,7 @@
             AnswerBallBox.BackColor = Color.FromArgb(192, 255, 255);
             AnswerBallBox.BorderStyle = BorderStyle.FixedSingle;
             AnswerBallBox.ForeColor = SystemColors.WindowText;
-            AnswerBallBox.Location = new Point(193, 209);
+            AnswerBallBox.Location = new Point(193, 200);
             AnswerBallBox.Name = "AnswerBallBox";
             AnswerBallBox.Size = new Size(159, 21);
             AnswerBallBox.TabIndex = 31;
@@ -210,23 +208,12 @@
             // 
             AnswerBallLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
             AnswerBallLabel.ForeColor = Color.White;
-            AnswerBallLabel.Location = new Point(193, 169);
+            AnswerBallLabel.Location = new Point(193, 160);
             AnswerBallLabel.Name = "AnswerBallLabel";
             AnswerBallLabel.Size = new Size(159, 37);
             AnswerBallLabel.TabIndex = 29;
             AnswerBallLabel.Text = "ЧИСЛО БАЛЛОВ ЗА ВЫБОР";
             AnswerBallLabel.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // IsTrueAnswerBox
-            // 
-            IsTrueAnswerBox.FlatAppearance.BorderSize = 0;
-            IsTrueAnswerBox.FlatStyle = FlatStyle.Flat;
-            IsTrueAnswerBox.Location = new Point(193, 137);
-            IsTrueAnswerBox.Name = "IsTrueAnswerBox";
-            IsTrueAnswerBox.Size = new Size(159, 19);
-            IsTrueAnswerBox.TabIndex = 28;
-            IsTrueAnswerBox.Text = "ПРАВИЛЬНЫЙ ОТВЕТ?";
-            IsTrueAnswerBox.UseVisualStyleBackColor = true;
             // 
             // AnswerNameLabel
             // 
@@ -252,7 +239,7 @@
             // 
             AnswerListBox.BackColor = Color.DeepSkyBlue;
             AnswerListBox.BorderStyle = BorderStyle.None;
-            AnswerListBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            AnswerListBox.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             AnswerListBox.ForeColor = Color.White;
             AnswerListBox.Location = new Point(6, 52);
             AnswerListBox.Name = "AnswerListBox";
@@ -291,7 +278,7 @@
             AddAnswerButton.FlatStyle = FlatStyle.Flat;
             AddAnswerButton.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             AddAnswerButton.ForeColor = Color.White;
-            AddAnswerButton.Location = new Point(193, 236);
+            AddAnswerButton.Location = new Point(193, 227);
             AddAnswerButton.Name = "AddAnswerButton";
             AddAnswerButton.Size = new Size(159, 23);
             AddAnswerButton.TabIndex = 7;
@@ -394,7 +381,7 @@
             // 
             QuestionListBox.BackColor = Color.DeepSkyBlue;
             QuestionListBox.BorderStyle = BorderStyle.None;
-            QuestionListBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            QuestionListBox.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             QuestionListBox.ForeColor = Color.White;
             QuestionListBox.Location = new Point(6, 52);
             QuestionListBox.Name = "QuestionListBox";
@@ -493,7 +480,6 @@
         private Label QuestionNameLabel;
         private TextBox QuestionNameBox;
         private GroupBox groupBox1;
-        private CheckBox IsTrueAnswerBox;
         private Label AnswerNameLabel;
         private TextBox AnswerNameBox;
         private Button AnswerSearchButton;

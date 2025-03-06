@@ -33,7 +33,6 @@
             SearchButton = new Button();
             DeleteSurveyButton = new Button();
             EditSurveyButton = new Button();
-            button2 = new Button();
             CreateSurveyButton = new Button();
             SurveiesListBox = new ListBox();
             panel1.SuspendLayout();
@@ -46,7 +45,6 @@
             panel1.Controls.Add(SearchButton);
             panel1.Controls.Add(DeleteSurveyButton);
             panel1.Controls.Add(EditSurveyButton);
-            panel1.Controls.Add(button2);
             panel1.Controls.Add(CreateSurveyButton);
             panel1.Controls.Add(SurveiesListBox);
             panel1.Location = new Point(12, 12);
@@ -85,9 +83,9 @@
             DeleteSurveyButton.FlatStyle = FlatStyle.Flat;
             DeleteSurveyButton.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold);
             DeleteSurveyButton.ForeColor = Color.White;
-            DeleteSurveyButton.Location = new Point(484, 305);
+            DeleteSurveyButton.Location = new Point(484, 290);
             DeleteSurveyButton.Name = "DeleteSurveyButton";
-            DeleteSurveyButton.Size = new Size(232, 81);
+            DeleteSurveyButton.Size = new Size(232, 105);
             DeleteSurveyButton.TabIndex = 4;
             DeleteSurveyButton.Text = "Удалить опрос";
             DeleteSurveyButton.UseVisualStyleBackColor = false;
@@ -100,27 +98,13 @@
             EditSurveyButton.FlatStyle = FlatStyle.Flat;
             EditSurveyButton.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold);
             EditSurveyButton.ForeColor = Color.White;
-            EditSurveyButton.Location = new Point(484, 218);
+            EditSurveyButton.Location = new Point(484, 162);
             EditSurveyButton.Name = "EditSurveyButton";
-            EditSurveyButton.Size = new Size(232, 81);
+            EditSurveyButton.Size = new Size(232, 105);
             EditSurveyButton.TabIndex = 3;
             EditSurveyButton.Text = "Редактировать опрос";
             EditSurveyButton.UseVisualStyleBackColor = false;
             EditSurveyButton.Click += EditSurveyButton_Click;
-            // 
-            // button2
-            // 
-            button2.BackColor = Color.DeepSkyBlue;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(484, 44);
-            button2.Name = "button2";
-            button2.Size = new Size(232, 81);
-            button2.TabIndex = 2;
-            button2.Text = "Просмотерть результаты";
-            button2.UseVisualStyleBackColor = false;
             // 
             // CreateSurveyButton
             // 
@@ -129,9 +113,9 @@
             CreateSurveyButton.FlatStyle = FlatStyle.Flat;
             CreateSurveyButton.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold);
             CreateSurveyButton.ForeColor = Color.White;
-            CreateSurveyButton.Location = new Point(484, 131);
+            CreateSurveyButton.Location = new Point(484, 36);
             CreateSurveyButton.Name = "CreateSurveyButton";
-            CreateSurveyButton.Size = new Size(232, 81);
+            CreateSurveyButton.Size = new Size(232, 105);
             CreateSurveyButton.TabIndex = 1;
             CreateSurveyButton.Text = "Создать опрос";
             CreateSurveyButton.UseVisualStyleBackColor = false;
@@ -141,11 +125,11 @@
             // 
             SurveiesListBox.BackColor = Color.DeepSkyBlue;
             SurveiesListBox.BorderStyle = BorderStyle.None;
-            SurveiesListBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            SurveiesListBox.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             SurveiesListBox.ForeColor = Color.White;
             SurveiesListBox.Location = new Point(28, 65);
             SurveiesListBox.Name = "SurveiesListBox";
-            SurveiesListBox.Size = new Size(411, 336);
+            SurveiesListBox.Size = new Size(411, 330);
             SurveiesListBox.TabIndex = 0;
             // 
             // UserSurveiesForm
@@ -174,7 +158,6 @@
         private Button SearchButton;
         private Button DeleteSurveyButton;
         private Button EditSurveyButton;
-        private Button button2;
         private Button CreateSurveyButton;
         private ListBox SurveiesListBox;
     }

@@ -42,10 +42,11 @@ namespace Questionnaire.Forms
             SurveyNameLabel.Text = Survey.Name;
             SurveyBallLabel.Text = $"{Survey.Ball}";
             ResultBar.Maximum = Survey.Ball;
-            int Ball = 0;
+            int ball = 0;
             foreach (var answer in answers)
-                Ball += answer.Ball;
-            ResultBar.Value = Ball;
+                ball += answer.Ball;
+            ResultBar.Value = ball;
+            UserBallLabel.Text = $"{ball}";
         }
     }
 }
