@@ -73,7 +73,6 @@ namespace Questionnaire
                 text +=
                     user.Id + "   " +
                     user.Name + "   " +
-                    user.IsTrue + "   " +
                     user.SurveyId + "   " +
                     user.QuestionId
                     + "\n";

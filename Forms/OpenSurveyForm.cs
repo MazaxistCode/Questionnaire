@@ -53,6 +53,7 @@ namespace Questionnaire.Forms
             {
                 Answer answer = answers.First(answer => answer.Name == AnswersListBox.Text && answer.QuestionId == QuestionOn.Id);
                 answerQuestions[Array.IndexOf(answerQuestions, answerQuestions.First(answerQuestion => answerQuestion.Question.Id == QuestionOn.Id))].Answer = answer;
+                QuestionCountLabel.Text = $"{answerQuestions.Count(answer => answer.Answer is not null)} | {answerQuestions.Length}";
                 int index = QuestionsListBox.SelectedIndex;
                 if (index < QuestionsListBox.Items.Count - 1)
                 {

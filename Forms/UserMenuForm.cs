@@ -121,7 +121,6 @@ namespace Questionnaire.Forms
                         form.ShowDialog();
                         Location = form.Location;
                         Visible = true;
-                        Close();
                     }
                 }
             }

@@ -1,13 +1,5 @@
 ﻿using Questionnaire.DB;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Questionnaire.Forms
 {
@@ -35,7 +27,7 @@ namespace Questionnaire.Forms
 
         private void CreateSurveyForm_Load(object sender, EventArgs e)
         {
-            if(IsEdit)
+            if (IsEdit)
             {
                 SurveyNameBox.Text = survey.Name;
                 SurveyNameBox.ReadOnly = true;
@@ -58,13 +50,27 @@ namespace Questionnaire.Forms
                 if (IsEdit)
                 {
                     if (questions.Any() && answers.Any() && questions.Where(question =>
-                        answers.Where(answer => answer.Question == question).Any()).Count() == questions.Count() &&
+                        answers.Where(answer => answer.Question == question).Any()).Count() == questions.Count &&
                         context.Surveies.Where(survey => survey.Name == SurveyNameBox.Text).Any())
                     {
                         int maxBall = 0;
-                        foreach (var answer in answers)
-                            maxBall += answer.Ball;
+                        foreach (var question in questions)
+                        {
+                            int maxBallQuestion = 0;
+                            foreach (var answer in answers.Where(answer => answer.Question.Name == question.Name).ToArray())
+                            {
+                                if (answer.Ball > maxBallQuestion)
+                                    maxBallQuestion = answer.Ball;
+                            }
+                            maxBall += maxBallQuestion;
+                        }
                         survey.Ball = maxBall;
+                        AnswerSurvey[] answerSurveys = context.AnswerSurveies.Where(answerSurbey => answerSurbey.SurveyId == survey.Id).ToArray();
+                        List<AnswerQuestion> answerQuestions = [];
+                        foreach (var answerSurvey in answerSurveys)
+                            answerQuestions.AddRange(context.AnswerQuestions.Where(answerQuestion => answerQuestion.AnswerSurveyId == answerSurvey.Id).ToList());
+                        context.AnswerQuestions.RemoveRange(answerQuestions);
+                        context.AnswerSurveies.RemoveRange(answerSurveys);
                         context.Surveies.Update(survey);
                         context.SaveChanges();
                         List<Question> allOldDBQuestions = context.Questions.Where(question => question.SurveyId == survey.Id).ToList();
@@ -94,16 +100,15 @@ namespace Questionnaire.Forms
                         context.SaveChanges();
                         foreach (var oldQuestion in oldDBQuestions)
                         {
-                            List<Answer> oldQuestionAnswers = oldDBAnswers.Where(oldAnswer => oldAnswer.Question.Id == oldQuestion.Id).ToList();
+                            List<Answer> oldQuestionAnswers = oldDBAnswers.Where(oldAnswer => oldAnswer?.Question?.Id == oldQuestion.Id).ToList();
                             List<Answer> questionAnswers = answers.Where(answer => answer.QuestionId == oldQuestion.Id || answer.Question.Name == oldQuestion.Name).ToList();
-                            foreach(var oldAnswer in oldQuestionAnswers)
+                            foreach (var oldAnswer in oldQuestionAnswers)
                             {
                                 Answer? editAnswer = questionAnswers.Where(answer => answer.Id == oldAnswer.Id).FirstOrDefault();
                                 if (editAnswer is not null)
                                 {
                                     oldAnswer.Name = editAnswer.Name;
                                     oldAnswer.Ball = editAnswer.Ball;
-                                    oldAnswer.IsTrue = editAnswer.IsTrue;
                                     context.Answers.Update(oldAnswer);
                                     answers.Remove(editAnswer);
                                 }
@@ -120,7 +125,6 @@ namespace Questionnaire.Forms
                             {
                                 Ball = answer.Ball,
                                 Name = answer.Name,
-                                IsTrue = answer.IsTrue,
                                 QuestionId = answer.Question.Id,
                                 SurveyId = answer.Question.SurveyId
                             });
@@ -129,7 +133,7 @@ namespace Questionnaire.Forms
                 else
                 {
                     if (questions.Any() && answers.Any() && questions.Where(question =>
-                        answers.Where(answer => answer.Question == question).Any()).Count() == questions.Count() &&
+                        answers.Where(answer => answer.Question == question).Any()).Count() == questions.Count &&
                         SurveyNameBox.Text != string.Empty &&
                         !context.Surveies.Where(survey => survey.Name == SurveyNameBox.Text).Any())
                     {
@@ -164,7 +168,6 @@ namespace Questionnaire.Forms
                 QuestionUpdateBox.Text = string.Empty;
                 AnswerNameBox.Text = string.Empty;
                 AnswerBallBox.Text = "0";
-                IsTrueAnswerBox.Checked = false;
                 AnswerUpdateBox.Text = string.Empty;
             }
         }
@@ -180,7 +183,6 @@ namespace Questionnaire.Forms
                 }
                 AnswerNameBox.Text = string.Empty;
                 AnswerBallBox.Text = "0";
-                IsTrueAnswerBox.Checked = false;
                 AnswerUpdateBox.Text = string.Empty;
             }
         }
@@ -201,7 +203,6 @@ namespace Questionnaire.Forms
                 AnswerSearchBox.Text = string.Empty;
                 AnswerListBox.Items.Clear();
                 QuestionLabel.Text = "ВОПРОС";
-                IsTrueAnswerBox.Checked = false;
                 AnswerNameBox.Text = string.Empty;
                 AnswerBallBox.Text = "0";
                 AnswerUpdateBox.Text = string.Empty;
@@ -214,7 +215,6 @@ namespace Questionnaire.Forms
         {
             if (QuestionNameBox.Text != string.Empty && !questions.Where(question => question.Name == QuestionNameBox.Text).Any())
                 questions.Add(new() { Name = QuestionNameBox.Text, Survey = survey });
-            QuestionUpdateBox.Text = QuestionNameBox.Text;
             QuestionListBox.Items.Clear();
             foreach (var question in questions.Where(question => question.Name.Contains(QuestionSearchBox.Text)))
             {
@@ -228,9 +228,10 @@ namespace Questionnaire.Forms
                 AnswerListBox.Items.Add(answer.Name);
             }
             QuestionLabel.Text = QuestionNameBox.Text;
-            IsTrueAnswerBox.Checked = false;
             AnswerNameBox.Text = string.Empty;
             AnswerBallBox.Text = "0";
+            QuestionUpdateBox.Text = string.Empty;
+            QuestionNameBox.Text = string.Empty;
         }
 
         private void RemAnswerButton_Click(object sender, EventArgs e)
@@ -242,7 +243,6 @@ namespace Questionnaire.Forms
             {
                 AnswerListBox.Items.Add(answer.Name);
             }
-            IsTrueAnswerBox.Checked = false;
             AnswerNameBox.Text = string.Empty;
             AnswerBallBox.Text = "0";
             AnswerUpdateBox.Text = string.Empty;
@@ -250,7 +250,7 @@ namespace Questionnaire.Forms
 
         private void AddAnswerButton_Click(object sender, EventArgs e)
         {
-            if (AnswerNameBox.Text != string.Empty && questions.Where(question => question.Name == QuestionLabel.Text).Any() && answers.Any(answer => AnswerListBox.Items.Contains(answer.Name)))
+            if (AnswerNameBox.Text != string.Empty && questions.Where(question => question.Name == QuestionLabel.Text).Any() && !AnswerListBox.Items.Contains(AnswerNameBox.Text))
             {
                 bool isNewAnswer = !answers.Where(answer => answer.Question == questionOn).Where(answer => answer.Name == AnswerNameBox.Text).Any();
                 Answer answer = answers.Where(answer => answer.Question == questionOn).Where(answer => answer.Name == AnswerNameBox.Text).FirstOrDefault() ?? new();
@@ -258,7 +258,6 @@ namespace Questionnaire.Forms
                 answer.Question = questionOn;
                 answer.Name = AnswerNameBox.Text;
                 answer.Ball = int.TryParse(AnswerBallBox.Text, out int ball) ? ball : 0;
-                answer.IsTrue = IsTrueAnswerBox.Checked;
                 if (isNewAnswer)
                     answers.Add(answer);
                 AnswerListBox.Items.Clear();
@@ -266,7 +265,6 @@ namespace Questionnaire.Forms
                 {
                     AnswerListBox.Items.Add(answerOn.Name);
                 }
-                IsTrueAnswerBox.Checked = false;
                 AnswerBallBox.Value = 0;
                 AnswerNameBox.Text = string.Empty;
                 AnswerUpdateBox.Text = string.Empty;
@@ -287,7 +285,6 @@ namespace Questionnaire.Forms
                     AnswerListBox.Items.Add(answer.Name);
                 }
                 QuestionLabel.Text = QuestionNameBox.Text;
-                IsTrueAnswerBox.Checked = false;
                 AnswerSearchBox.Text = string.Empty;
                 AnswerNameBox.Text = string.Empty;
                 AnswerBallBox.Text = "0";
@@ -304,7 +301,6 @@ namespace Questionnaire.Forms
                 QuestionLabel.Text = answerOn.Question.Name;
                 AnswerNameBox.Text = answerOn.Name;
                 AnswerBallBox.Text = $"{answerOn.Ball}";
-                IsTrueAnswerBox.Checked = answerOn.IsTrue;
             }
         }
 
@@ -336,7 +332,6 @@ namespace Questionnaire.Forms
             {
                 Answer answerOn = answers.Where(answer => answer.Question == questionOn && answer.Name == AnswerNameBox.Text).First();
                 answerOn.Name = AnswerUpdateBox.Text;
-                answerOn.IsTrue = IsTrueAnswerBox.Checked;
                 answerOn.Ball = int.TryParse(AnswerBallBox.Text, out int ball) ? ball : 0;
                 AnswerSearchBox.Text = string.Empty;
                 AnswerListBox.Items.Clear();

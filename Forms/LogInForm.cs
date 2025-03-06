@@ -56,72 +56,56 @@ namespace Questionnaire.Forms
                     context.SaveChanges();
 
                     User adminUser = new() { Login = "Admin", Email = "admin@gmail.com", Password = "Admin".GetHash(), Role = adminRole };
-                    User user1 = new() { Login = "12341234", Email = "user@gmail.com", Password = "1234".GetHash(), Role = userRole };
                     User userqgc = new() { Login = "qgc", Email = "qgc.cor@bk.ru", Password = "qgc".GetHash(), Role = userRole };
-                    context.Users.AddRange(adminUser, user1, userqgc);
+                    context.Users.AddRange(adminUser, userqgc);
                     context.SaveChanges();
 
-                    Survey survey1 = new() { Name = "quest 1", User = user1 };
-                    context.Surveies.AddRange(survey1);
-                    context.SaveChanges();
-
-                    Question question1_1 = new() { Name = "1 == 1", Survey = survey1 };
-                    context.Questions.AddRange(question1_1);
-                    context.SaveChanges();
-
-                    Answer answer1_1_1 = new() { Name = "T", IsTrue = true, Question = question1_1, Survey = survey1 };
-                    Answer answer1_1_2 = new() { Name = "F", Question = question1_1, Survey = survey1 };
-                    Answer answer1_1_3 = new() { Name = "NS", Question = question1_1, Survey = survey1 };
-                    context.Answers.AddRange(answer1_1_1, answer1_1_2, answer1_1_3);
-                    context.SaveChanges();
-
-                    Question question1_2 = new() { Name = "1 == 2", Survey = survey1 };
-                    context.Questions.AddRange(question1_2);
-                    context.SaveChanges();
-
-                    Answer answer1_2_1 = new() { Name = "T", Question = question1_2, Survey = survey1 };
-                    Answer answer1_2_2 = new() { Name = "F", IsTrue = true, Question = question1_2, Survey = survey1 };
-                    Answer answer1_2_3 = new() { Name = "NS", Question = question1_2, Survey = survey1 };
-                    context.Answers.AddRange(answer1_2_1, answer1_2_2, answer1_2_3);
-                    context.SaveChanges();
-
-                    Question question1_3 = new() { Name = "a == b", Survey = survey1 };
-                    context.Questions.AddRange(question1_3);
-                    context.SaveChanges();
-
-                    Answer answer1_3_1 = new() { Name = "T", Question = question1_3, Survey = survey1 };
-                    Answer answer1_3_2 = new() { Name = "F", Question = question1_3, Survey = survey1 };
-                    Answer answer1_3_3 = new() { Name = "NS", IsTrue = true, Question = question1_3, Survey = survey1 };
-                    context.Answers.AddRange(answer1_3_1, answer1_3_2, answer1_3_3);
-                    context.SaveChanges();
-
-                    Answer empty = new() { Name = "Не найден" };
-                    context.Answers.Add(empty);
-                    context.SaveChanges();
-                }
-                using (Context context = new())
-                {
-                    User user2 = new() { Login = "78907890", Email = "1234@gmail.com", Password = "7890".GetHash(), Role = context.Roles.Where(role => role.Name == "User").First() };
-                    context.Users.AddRange(user2);
-
-                    string thisIdSurvay = "quest 1";
-                    Survey survayAnswer = context.Surveies.Where(survay => survay.Name == thisIdSurvay).First();
-                    List<Question> questions = context.Questions.Where(quest => quest.Survey.Id == survayAnswer.Id).ToList();
-                    List<string> usersAnswers = new() { "T", "T", "NS" };
-                    List<Answer> answers = new();
-                    for (int i = 0; i < questions.Count; i++)
+                    Survey survey = new() { Name = "Насколько у тебя хороший день?", User = userqgc };
+                    Question[] questions =
                     {
-                        answers.Add(context.Answers.Where(answer => answer.Name == usersAnswers[i] && answer.Question.Id == questions[i].Id).First());
-                    }
-
-                    AnswerSurvey answerSurvey = new() { Survey = survayAnswer, User = user2 };
-                    context.AnswerSurveies.AddRange(answerSurvey);
-
-                    List<AnswerQuestion> answerQuestions = [];
-                    for (int i = 0; i < questions.Count && i < answers.Count; i++)
+                        new() { Name = "Как у тебя дела?", Survey = survey },
+                        new() { Name = "У тебя много пар сегодня?", Survey = survey },
+                        new() { Name = "Будешь ли ты играть сразу по приходу домой?", Survey = survey }
+                    };
+                    Answer[] answers =
                     {
-                        context.AnswerQuestions.Add(new() { Question = questions[i], Answer = answers[i], AnswerSurvey = answerSurvey });
+                        new() { Name = "Отлично", Ball = 10, Question = questions[0], Survey = survey },
+                        new() { Name = "Хорошо", Ball = 5, Question = questions[0], Survey = survey },
+                        new() { Name = "Нормально", Ball = 3, Question = questions[0], Survey = survey },
+                        new() { Name = "Ужасно", Ball = 1, Question = questions[0], Survey = survey },
+                        new() { Name = "Отвали", Ball = 0, Question = questions[0], Survey = survey },
+
+                        new() { Name = "Выходной!", Ball = 10, Question = questions[1], Survey = survey },
+                        new() { Name = "2", Ball = 4, Question = questions[1], Survey = survey },
+                        new() { Name = "3", Ball = 3, Question = questions[1], Survey = survey },
+                        new() { Name = "4", Ball = 2, Question = questions[1], Survey = survey },
+                        new() { Name = "5 / 4 со 2", Ball = 1, Question = questions[1], Survey = survey },
+                        new() { Name = "ВЕСЬ ДЕНЬ...", Ball = 0, Question = questions[1], Survey = survey },
+
+                        new() { Name = "Конечно!", Ball = 10, Question = questions[2], Survey = survey },
+                        new() { Name = "Да", Ball = 5, Question = questions[2], Survey = survey },
+                        new() { Name = "Взможно да", Ball = 4, Question = questions[2], Survey = survey },
+                        new() { Name = "Не знаю", Ball = 3, Question = questions[2], Survey = survey },
+                        new() { Name = "Возможно нет", Ball = 2, Question = questions[2], Survey = survey },
+                        new() { Name = "Нет", Ball = 1, Question = questions[2], Survey = survey },
+                        new() { Name = "НИКОГДА!", Ball = 0, Question = questions[2], Survey = survey }
+                    };
+                    int maxBall = 0;
+                    foreach (var question in questions)
+                    {
+                        int maxBallQuestion = 0;
+                        foreach (var answer in answers.Where(answer => answer.Question.Name == question.Name).ToArray())
+                        {
+                            if (answer.Ball > maxBallQuestion)
+                                maxBallQuestion = answer.Ball;
+                        }
+                        maxBall += maxBallQuestion;
                     }
+                    survey.Ball = maxBall;
+
+                    context.Surveies.Add(survey);
+                    context.Questions.AddRange(questions);
+                    context.Answers.AddRange(answers);
                     context.SaveChanges();
                 }
             }
@@ -140,10 +124,20 @@ namespace Questionnaire.Forms
                 {
                     if (context.Users.Where(user => user.Password == password.GetHash()).Any())
                     {
-                        UserMenuForm form = new(context.Users.Where(user => user.Login == login).First().Email);
-                        Visible = false;
-                        form.ShowDialog();
-                        Close();
+                        if(context.Users.First(user => user.Login == login || user.Email == login).RoleId == context.Roles.First(role => role.Name == "Admin").Id)
+                        {
+                            UserSurveiesForm form = new(context.Users.Where(user => user.Login == login).First().Email, true);
+                            Visible = false;
+                            form.ShowDialog();
+                            Close();
+                        }
+                        else
+                        {
+                            UserMenuForm form = new(context.Users.Where(user => user.Login == login).First().Email);
+                            Visible = false;
+                            form.ShowDialog();
+                            Close();
+                        }
                     }
                     else
                         MessageBox.Show("для авторизации - впешите правильный пароль.");
