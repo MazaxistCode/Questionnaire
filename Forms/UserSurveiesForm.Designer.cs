@@ -144,7 +144,7 @@
             MaximizeBox = false;
             Name = "UserSurveiesForm";
             StartPosition = FormStartPosition.Manual;
-            Text = "UserSurveysForm";
+            Text = "Questionnaire";
             Load += UserSurveysForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

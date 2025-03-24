@@ -171,10 +171,11 @@
             BackColor = Color.RoyalBlue;
             ClientSize = new Size(384, 236);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "LogOnForm";
             StartPosition = FormStartPosition.Manual;
-            Text = "LogOnForm";
+            Text = "Questionnaire";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);

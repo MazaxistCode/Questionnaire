@@ -137,9 +137,10 @@
             ClientSize = new Size(784, 461);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "OpenSurveyForm";
             StartPosition = FormStartPosition.Manual;
-            Text = "OpenSurveyForm";
+            Text = "Questionnaire";
             Load += OpenSurveyForm_Load;
             panel1.ResumeLayout(false);
             ResumeLayout(false);

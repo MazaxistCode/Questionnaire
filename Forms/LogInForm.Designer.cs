@@ -141,6 +141,7 @@
             BackColor = Color.RoyalBlue;
             ClientSize = new Size(384, 236);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "LogInForm";
             StartPosition = FormStartPosition.CenterScreen;

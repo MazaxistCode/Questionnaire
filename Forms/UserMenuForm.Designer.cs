@@ -161,7 +161,7 @@
             MaximizeBox = false;
             Name = "UserMenuForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "UserMenu";
+            Text = "Questionnaire";
             Load += UserMenu_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

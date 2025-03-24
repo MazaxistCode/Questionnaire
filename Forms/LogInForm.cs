@@ -140,7 +140,7 @@ namespace Questionnaire.Forms
                         }
                     }
                     else
-                        MessageBox.Show("для авторизации - впешите правильный пароль.");
+                        MessageBox.Show("для авторизации - впишите правильный пароль.");
                 }
                 else
                     MessageBox.Show("вы не зарегистрированы");

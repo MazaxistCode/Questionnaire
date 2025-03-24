@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            UserBallLabel = new Label();
             SurveyBallLabel = new Label();
             ResultBar = new ProgressBar();
             CloseButton = new Button();
             SurveyNameLabel = new Label();
-            UserBallLabel = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -49,6 +49,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(760, 437);
             panel1.TabIndex = 4;
+            // 
+            // UserBallLabel
+            // 
+            UserBallLabel.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            UserBallLabel.ForeColor = Color.White;
+            UserBallLabel.Location = new Point(130, 204);
+            UserBallLabel.Name = "UserBallLabel";
+            UserBallLabel.Size = new Size(68, 25);
+            UserBallLabel.TabIndex = 36;
+            UserBallLabel.Text = "User";
+            UserBallLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // SurveyBallLabel
             // 
@@ -95,27 +106,19 @@
             SurveyNameLabel.Text = "ИМЯ ОПРОСА";
             SurveyNameLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // UserBallLabel
-            // 
-            UserBallLabel.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            UserBallLabel.ForeColor = Color.White;
-            UserBallLabel.Location = new Point(130, 204);
-            UserBallLabel.Name = "UserBallLabel";
-            UserBallLabel.Size = new Size(68, 25);
-            UserBallLabel.TabIndex = 36;
-            UserBallLabel.Text = "User";
-            UserBallLabel.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // UserResultForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.RoyalBlue;
             ClientSize = new Size(784, 461);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "UserResultForm";
             StartPosition = FormStartPosition.Manual;
-            Text = "UserResultForm";
+            Text = "Questionnaire";
             Load += UserResultForm_Load;
             panel1.ResumeLayout(false);
             ResumeLayout(false);
