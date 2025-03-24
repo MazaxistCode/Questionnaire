@@ -19,7 +19,7 @@ namespace Questionnaire.DB
         public Context() => Database.EnsureCreated();
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@$"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug\\net9.0-windows", "DB") + "DB.mdf"};Integrated Security=True;");
+            optionsBuilder.UseSqlServer(@$"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug\\net9.0-windows", "DB").Replace("bin\\Release\\net9.0-windows", "DB") + "DB.mdf"};Integrated Security=True;");
         }
     }
 }
