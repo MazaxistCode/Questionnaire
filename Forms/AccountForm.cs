@@ -21,14 +21,14 @@ namespace Questionnaire.Forms
         private string UserEmail { get; set; }
         private void AccountForm_Load(object sender, EventArgs e)
         {
-            AvatarPictureBox.Image = new Bitmap(AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug\\net9.0-windows", "Avatars") + UserEmail.GetHash() + ".png");
+            AvatarPictureBox.Image = new Bitmap(AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug\\net9.0-windows", "Avatars").Replace("bin\\Release\\net9.0-windows", "Avatars") + UserEmail.GetHash() + ".png");
             using Context context = new();
         }
 
         private void AvatarButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog uaerAvatar = new();
-            string pathAvatar = AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug\\net9.0-windows", "Avatars") + UserEmail.GetHash() + ".png";
+            string pathAvatar = AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug\\net9.0-windows", "Avatars").Replace("bin\\Release\\net9.0-windows", "Avatars") + UserEmail.GetHash() + ".png";
             uaerAvatar.Filter = "JPeg|*.jpg|Png|*.png";
             uaerAvatar.Title = "Выберите фото";
             uaerAvatar.ShowDialog();
