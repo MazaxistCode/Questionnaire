@@ -226,7 +226,7 @@
             MaximizeBox = false;
             Name = "AccountForm";
             StartPosition = FormStartPosition.Manual;
-            Text = "AccountForm";
+            Text = "Questionnaire";
             Load += AccountForm_Load;
             panel1.ResumeLayout(false);
             groupBox3.ResumeLayout(false);

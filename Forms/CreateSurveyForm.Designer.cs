@@ -219,7 +219,7 @@
             // 
             AnswerNameLabel.Font = new Font("Times New Roman", 9F, FontStyle.Bold);
             AnswerNameLabel.ForeColor = Color.White;
-            AnswerNameLabel.Location = new Point(193, 86);
+            AnswerNameLabel.Location = new Point(193, 95);
             AnswerNameLabel.Name = "AnswerNameLabel";
             AnswerNameLabel.Size = new Size(159, 21);
             AnswerNameLabel.TabIndex = 26;
@@ -230,7 +230,7 @@
             // 
             AnswerNameBox.BackColor = Color.FromArgb(192, 255, 255);
             AnswerNameBox.BorderStyle = BorderStyle.FixedSingle;
-            AnswerNameBox.Location = new Point(193, 110);
+            AnswerNameBox.Location = new Point(193, 119);
             AnswerNameBox.Name = "AnswerNameBox";
             AnswerNameBox.Size = new Size(159, 21);
             AnswerNameBox.TabIndex = 27;
@@ -455,7 +455,7 @@
             MaximizeBox = false;
             Name = "CreateSurveyForm";
             StartPosition = FormStartPosition.Manual;
-            Text = "CreateSurveyForm";
+            Text = "Questionnaire";
             Load += CreateSurveyForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

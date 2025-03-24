@@ -24,7 +24,7 @@ namespace Questionnaire.Forms
         private void OnButton_Click(object sender, EventArgs e)
         {
             if (LoginBox.Text == string.Empty || PassBox.Text == string.Empty || PassBox2.Text == string.Empty)
-                MessageBox.Show("зполните все поля");
+                MessageBox.Show("заполните все поля");
             else
             {
                 Context context = new();
@@ -66,7 +66,7 @@ namespace Questionnaire.Forms
                             MessageBox.Show("пароль повторён неверно");
                     }
                     else
-                        MessageBox.Show("для регистрации впишите почту в поле для логина.");
+                        MessageBox.Show("для регистрации впишите почту в поле для почты.");
                 }
             }
         }
