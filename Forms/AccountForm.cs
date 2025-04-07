@@ -70,7 +70,7 @@ namespace Questionnaire.Forms
                     string enterCode = form.codeBox.Text;
                     if ($"{code}" == enterCode)
                     {
-                        user.Login = isLogin ? context.Users.Any(user => user.Login == LoginBox.Text) ? LoginBox.Text : user.Login : user.Login;
+                        user.Login = isLogin ? context.Users.Any(user => user.Login == LoginBox.Text) ? user.Login : LoginBox.Text : user.Login;
                         user.Password = isLogin ? PassBox.Text.GetHash() : user.Password;
                         context.SaveChanges();
                     }
