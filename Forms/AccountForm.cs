@@ -29,7 +29,7 @@ namespace Questionnaire.Forms
         {
             OpenFileDialog uaerAvatar = new();
             string pathAvatar = AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug\\net9.0-windows", "Avatars").Replace("bin\\Release\\net9.0-windows", "Avatars") + UserEmail.GetHash() + ".png";
-            uaerAvatar.Filter = "JPeg|*.jpg|Png|*.png";
+            uaerAvatar.Filter = "Png|*.png";
             uaerAvatar.Title = "Выберите фото";
             uaerAvatar.ShowDialog();
             if (uaerAvatar.FileName != "")
@@ -70,7 +70,7 @@ namespace Questionnaire.Forms
                     string enterCode = form.codeBox.Text;
                     if ($"{code}" == enterCode)
                     {
-                        user.Login = isLogin ? LoginBox.Text : user.Login;
+                        user.Login = isLogin ? context.Users.Any(user => user.Login == LoginBox.Text) ? LoginBox.Text : user.Login : user.Login;
                         user.Password = isLogin ? PassBox.Text.GetHash() : user.Password;
                         context.SaveChanges();
                     }

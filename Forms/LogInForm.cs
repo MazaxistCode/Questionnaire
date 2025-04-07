@@ -12,7 +12,7 @@ namespace Questionnaire.Forms
 {
     public partial class LogInForm : Form
     {
-        public LogInForm(bool isTest = false, bool createDB = false, string email = "admin@gmail.com")
+        public LogInForm(bool isTest = false, bool createDB = false, string email = "qgc.cor@bk.ru")
         {
             UserEmail = email;
             this.isTest = isTest;
