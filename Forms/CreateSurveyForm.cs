@@ -236,8 +236,8 @@ namespace Questionnaire.Forms
 
         private void RemAnswerButton_Click(object sender, EventArgs e)
         {
-            if (AnswerNameBox.Text != string.Empty && answers.Where(answer => answer.Name == AnswerNameBox.Text).Any())
-                answers.Remove(answers.Where(answer => answer.Name == AnswerNameBox.Text).First());
+            if (AnswerNameBox.Text != string.Empty && answers.Where(answer => answer.Name == AnswerNameBox.Text && answer.Question.Name == questionOn.Name).Any())
+                answers.Remove(answers.Where(answer => answer.Name == AnswerNameBox.Text && answer.Question.Name == questionOn.Name).First());
             AnswerListBox.Items.Clear();
             foreach (var answer in answers.Where(answer => answer.Question == questionOn))
             {
