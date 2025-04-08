@@ -11,20 +11,40 @@ using System.Windows.Forms;
 
 namespace Questionnaire.Forms
 {
+    /// <summary>
+    /// Класс формы личного кабинета
+    /// </summary>
     public partial class AccountForm : Form
     {
+        /// <summary>
+        /// Конструктор формы личного кабинета
+        /// </summary>
+        /// <param name="email">Почта авторизованного пользователя</param>
         public AccountForm(string email)
         {
             UserEmail = email;
             InitializeComponent();
         }
+        /// <summary>
+        /// Почта пользователя
+        /// </summary>
         private string UserEmail { get; set; }
+        /// <summary>
+        /// Загрузчик формы личного кабинета
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void AccountForm_Load(object sender, EventArgs e)
         {
             AvatarPictureBox.Image = new Bitmap(AppDomain.CurrentDomain.BaseDirectory.Replace("bin\\Debug\\net9.0-windows", "Avatars").Replace("bin\\Release\\net9.0-windows", "Avatars") + UserEmail.GetHash() + ".png");
             using Context context = new();
         }
 
+        /// <summary>
+        /// Кнопка смены аватара
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void AvatarButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog uaerAvatar = new();
@@ -44,6 +64,11 @@ namespace Questionnaire.Forms
             AvatarPictureBox.Image = new Bitmap(pathAvatar);
         }
 
+        /// <summary>
+        /// Кнопка применения изменений
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void SaveButton_Click(object sender, EventArgs e)
         {
             using (Context context = new())

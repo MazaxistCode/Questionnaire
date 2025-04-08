@@ -3,8 +3,16 @@ using System.Data;
 
 namespace Questionnaire.Forms
 {
+    /// <summary>
+    /// Класс формы создания опроса
+    /// </summary>
     public partial class CreateSurveyForm : Form
     {
+        /// <summary>
+        /// Конструктор формы создания опроса
+        /// </summary>
+        /// <param name="email">Почта авторизированного пользователя</param>
+        /// <param name="survey">Выбранный опрос</param>
         public CreateSurveyForm(string email, Survey? survey = null)
         {
             UserEmail = email;
@@ -18,13 +26,36 @@ namespace Questionnaire.Forms
             }
             InitializeComponent();
         }
+        /// <summary>
+        /// Редактирование опроса да/нет
+        /// </summary>
         bool IsEdit { get; set; }
+        /// <summary>
+        /// Почта пользователя
+        /// </summary>
         string UserEmail { get; set; }
+        /// <summary>
+        /// Опрос
+        /// </summary>
         private Survey survey;
+        /// <summary>
+        /// Лист вопросов
+        /// </summary>
         private List<Question> questions;
+        /// <summary>
+        /// Выбранный вопрос
+        /// </summary>
         private Question questionOn;
+        /// <summary>
+        /// Лист ответов
+        /// </summary>
         private List<Answer> answers;
 
+        /// <summary>
+        /// Загрузчик формы создания опроса
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void CreateSurveyForm_Load(object sender, EventArgs e)
         {
             if (IsEdit)
@@ -43,16 +74,22 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка создания опроса
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void CreateSurveyButton_Click(object sender, EventArgs e)
         {
-            using (Context context = new())
+            if (IsEdit)
             {
-                if (IsEdit)
+                using (Context context = new())
                 {
                     if (questions.Any() && answers.Any() && questions.Where(question =>
-                        answers.Where(answer => answer.Question == question).Any()).Count() == questions.Count &&
-                        context.Surveies.Where(survey => survey.Name == SurveyNameBox.Text).Any())
+                    answers.Where(answer => answer.Question == question).Any()).Count() == questions.Count &&
+                    context.Surveies.Where(survey => survey.Name == SurveyNameBox.Text).Any())
                     {
+
                         int maxBall = 0;
                         foreach (var question in questions)
                         {
@@ -128,15 +165,21 @@ namespace Questionnaire.Forms
                                 QuestionId = answer.Question.Id,
                                 SurveyId = answer.Question.SurveyId
                             });
+                        context.SaveChanges();
+                        Close();
                     }
                 }
-                else
+            }
+            else
+            {
+                using (Context context = new())
                 {
                     if (questions.Any() && answers.Any() && questions.Where(question =>
-                        answers.Where(answer => answer.Question == question).Any()).Count() == questions.Count &&
-                        SurveyNameBox.Text != string.Empty &&
-                        !context.Surveies.Where(survey => survey.Name == SurveyNameBox.Text).Any())
+                    answers.Where(answer => answer.Question == question).Any()).Count() == questions.Count &&
+                    SurveyNameBox.Text != string.Empty &&
+                    !context.Surveies.Where(survey => survey.Name == SurveyNameBox.Text).Any())
                     {
+
                         int maxBall = 0;
                         foreach (var answer in answers)
                             maxBall += answer.Ball;
@@ -146,13 +189,18 @@ namespace Questionnaire.Forms
                         context.Surveies.Add(survey);
                         context.Questions.AddRange(questions);
                         context.Answers.AddRange(answers);
+                        context.SaveChanges();
+                        Close();
                     }
                 }
-                context.SaveChanges();
-                Close();
             }
         }
 
+        /// <summary>
+        /// Кнопка поиска вопросов
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void QuestionSearchButton_Click(object sender, EventArgs e)
         {
             using (Context context = new())
@@ -172,6 +220,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка поиска ответов
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void AnswerSearchButton_Click(object sender, EventArgs e)
         {
             using (Context context = new())
@@ -187,11 +240,16 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка удаления вопроса
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void RemQuestionButton_Click(object sender, EventArgs e)
         {
             if (QuestionNameBox.Text != string.Empty && questions.Where(question => question.Name == QuestionNameBox.Text).Any())
             {
-                foreach (var answer in answers.Where(answer => answer.QuestionId == questions.First(question => question.Name == QuestionNameBox.Text).Id).ToList())
+                foreach (var answer in answers.Where(answer => answer.Question == questions.First(question => question.Name == QuestionNameBox.Text)).ToList())
                     answers.Remove(answer);
                 questions.Remove(questionOn);
                 QuestionListBox.Items.Clear();
@@ -211,6 +269,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка добавления вопроса
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void AddQuestionButton_Click(object sender, EventArgs e)
         {
             if (QuestionNameBox.Text != string.Empty && !questions.Where(question => question.Name == QuestionNameBox.Text).Any())
@@ -234,6 +297,11 @@ namespace Questionnaire.Forms
             QuestionNameBox.Text = string.Empty;
         }
 
+        /// <summary>
+        /// Кнопка удаления ответа
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void RemAnswerButton_Click(object sender, EventArgs e)
         {
             if (AnswerNameBox.Text != string.Empty && answers.Where(answer => answer.Name == AnswerNameBox.Text && answer.Question.Name == questionOn.Name).Any())
@@ -248,6 +316,11 @@ namespace Questionnaire.Forms
             AnswerUpdateBox.Text = string.Empty;
         }
 
+        /// <summary>
+        /// Кнопка добавления ответа
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void AddAnswerButton_Click(object sender, EventArgs e)
         {
             if (AnswerNameBox.Text != string.Empty && questions.Where(question => question.Name == QuestionLabel.Text).Any() && !AnswerListBox.Items.Contains(AnswerNameBox.Text))
@@ -271,6 +344,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Выбор вопроса в листе вопросов
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void QuestionListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (QuestionListBox.Text != string.Empty)
@@ -292,6 +370,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Выбор ответа в листе ответов
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void AnswerListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (AnswerListBox.Text != string.Empty)
@@ -304,6 +387,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка изменения вопроса
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void QuestionUpdateButton_Click(object sender, EventArgs e)
         {
             if (QuestionNameBox.Text != string.Empty && QuestionUpdateBox.Text != string.Empty && QuestionNameBox.Text != QuestionUpdateBox.Text && !questions.Where(question => question.Name == QuestionUpdateBox.Text).Any())
@@ -326,6 +414,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка изменения ответа
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void AnswerUpdateButton_Click(object sender, EventArgs e)
         {
             if (AnswerNameBox.Text != string.Empty && AnswerUpdateBox.Text != string.Empty && AnswerNameBox.Text != AnswerUpdateBox.Text && !answers.Where(answer => answer.Question == questionOn).Any(answer => answer.Name == AnswerUpdateBox.Text))
