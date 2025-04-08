@@ -11,8 +11,16 @@ using System.Windows.Forms;
 
 namespace Questionnaire.Forms
 {
+    /// <summary>
+    /// Класс формы прохождения опроса
+    /// </summary>
     public partial class OpenSurveyForm : Form
     {
+        /// <summary>
+        /// Конструктор формы прохождения опроса
+        /// </summary>
+        /// <param name="surveyName"></param>
+        /// <param name="userEmail"></param>
         public OpenSurveyForm(string surveyName, string userEmail)
         {
             using (Context context = new())
@@ -28,14 +36,40 @@ namespace Questionnaire.Forms
             }
             InitializeComponent();
         }
+        /// <summary>
+        /// Пользователь, проходящий опрос
+        /// </summary>
         User User { get; set; }
+        /// <summary>
+        /// Опрос, который проходит пользователь
+        /// </summary>
         Survey Survey { get; set; }
+        /// <summary>
+        /// Вопросы опроса
+        /// </summary>
         Question[] questions { get; set; }
+        /// <summary>
+        /// Выбранный вопрос
+        /// </summary>
         Question? QuestionOn { get; set; }
+        /// <summary>
+        /// Ответы опроса
+        /// </summary>
         Answer[] answers { get; set; }
+        /// <summary>
+        /// Ответ на опрос
+        /// </summary>
         AnswerSurvey AnswerSurvey { get; set; }
+        /// <summary>
+        /// Ответы на вопросы опроса
+        /// </summary>
         AnswerQuestion[] answerQuestions { get; set; }
 
+        /// <summary>
+        /// Загрузчик формы прохождения опроса
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void OpenSurveyForm_Load(object sender, EventArgs e)
         {
             using (Context context = new())
@@ -47,6 +81,11 @@ namespace Questionnaire.Forms
 
         }
 
+        /// <summary>
+        /// Кнопка записи ответа на вопрос
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void AnswerButton_Click(object sender, EventArgs e)
         {
             if (QuestionOn != null && AnswersListBox.Text != string.Empty)
@@ -63,6 +102,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Нажатие на список вопросов
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void QuestionsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (QuestionsListBox.Text != string.Empty)
@@ -75,6 +119,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка завершения прохождения
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void EndButton_Click(object sender, EventArgs e)
         {
             using(Context context = new())

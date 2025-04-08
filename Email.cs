@@ -8,8 +8,16 @@ using System.Threading.Tasks;
 
 namespace Questionnaire
 {
+    /// <summary>
+    /// Класс отправки письма на почту
+    /// </summary>
     public static class Email
     {
+        /// <summary>
+        /// Метод по отправке письма на почту
+        /// </summary>
+        /// <param name="userEmail">Почта пользователя</param>
+        /// <param name="code">Код, который будет в письме</param>
         public static void SendMessageOnEmail(string userEmail, int code)
         {
             try

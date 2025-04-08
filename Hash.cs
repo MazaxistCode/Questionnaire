@@ -7,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace Questionnaire
 {
+    /// <summary>
+    /// Класс расширения для хеширования строк
+    /// </summary>
     static class Hash
     {
+        /// <summary>
+        /// Метод для хеширования строки
+        /// </summary>
+        /// <param name="text">Строка, которую надо хешировать</param>
+        /// <returns>Хешированная строка</returns>
         public static string GetHash(this string text)
         {
             using var hashAlg = MD5.Create();

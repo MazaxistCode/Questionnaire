@@ -12,15 +12,30 @@ using System.Windows.Forms;
 
 namespace Questionnaire.Forms
 {
+    /// <summary>
+    /// Класс формы регистрации
+    /// </summary>
     public partial class LogOnForm : Form
     {
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool isFinish { get; private set; }
+        /// <summary>
+        /// Загрузчик  формы регистрации
+        /// </summary>
         public LogOnForm()
         {
             InitializeComponent();
             isFinish = false;
         }
+        /// <summary>
+        /// Успешно ли пользователь зарегистрирован (да/нет)
+        /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool isFinish { get; private set; }
+
+        /// <summary>
+        /// Кнопка регистрации
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void OnButton_Click(object sender, EventArgs e)
         {
             if (LoginBox.Text == string.Empty || PassBox.Text == string.Empty || PassBox2.Text == string.Empty)
@@ -71,6 +86,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка авторизации
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void InButton_Click(object sender, EventArgs e)
         {
             Close();

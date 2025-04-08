@@ -24,7 +24,7 @@ namespace Questionnaire.Forms
         }
 
         /// <summary>
-        /// Загрузчик формы личного кабинета
+        /// Кнопка ввода кода с почты
         /// </summary>
         /// <param name="sender">Объект вызывающий событие</param>
         /// <param name="e">Объект обытия</param>
@@ -33,6 +33,11 @@ namespace Questionnaire.Forms
             Close();
         }
 
+        /// <summary>
+        /// Кнопка ввода не нужной почты
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void button1_Click(object sender, EventArgs e)
         {
             Close();
