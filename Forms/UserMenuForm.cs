@@ -11,14 +11,30 @@ using System.Windows.Forms;
 
 namespace Questionnaire.Forms
 {
+    /// <summary>
+    /// Класс формы главного меню
+    /// </summary>
     public partial class UserMenuForm : Form
     {
+        /// <summary>
+        /// Конструктор формы главного меню
+        /// </summary>
+        /// <param name="email">Почта авторизованного пользователя</param>
         public UserMenuForm(string email)
         {
             UserEmail = email;
             InitializeComponent();
         }
+        /// <summary>
+        /// Почта авторизованного пользователя
+        /// </summary>
         private string UserEmail { get; set; }
+
+        /// <summary>
+        /// Загрузчик формы главного меню
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void UserMenu_Load(object sender, EventArgs e)
         {
             using (Context context = new())
@@ -30,6 +46,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка поиска опросов
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void SearchButton_Click(object sender, EventArgs e)
         {
             using (Context context = new())
@@ -42,6 +63,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка личного кабинета
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void AccountButton_Click(object sender, EventArgs e)
         {
             AccountForm form = new(UserEmail);
@@ -55,6 +81,11 @@ namespace Questionnaire.Forms
             Visible = true;
         }
 
+        /// <summary>
+        /// Кнопка создания опроса
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void CreateSurveyButton_Click(object sender, EventArgs e)
         {
             CreateSurveyForm createSurveyForm = new(UserEmail);
@@ -77,6 +108,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка меню опросов пользователя
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void UserSurveiesButton_Click(object sender, EventArgs e)
         {
             UserSurveiesForm userSurveiesForm = new(UserEmail);
@@ -96,6 +132,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка прохождения опроса
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void OpenSurveyButton_Click(object sender, EventArgs e)
         {
             if (SurveiesListBox.Text != string.Empty)

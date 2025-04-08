@@ -8,10 +8,13 @@ using Questionnaire.Forms;
 
 namespace Questionnaire
 {
+    /// <summary>
+    /// Класс запуска программы
+    /// </summary>
     internal static class Program
     {
         /// <summary>
-        ///  The main entry point for the application.
+        ///  Метод запуска программы
         /// </summary>
         [STAThread]
         static void Main()

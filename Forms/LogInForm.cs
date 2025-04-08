@@ -10,8 +10,17 @@ using Questionnaire.Forms;
 
 namespace Questionnaire.Forms
 {
+    /// <summary>
+    /// Класс формы авторизации
+    /// </summary>
     public partial class LogInForm : Form
     {
+        /// <summary>
+        /// Конструктор формы авторизации
+        /// </summary>
+        /// <param name="isTest">Проводится ли сейчас тест (надо ли пропускать этап регистрации и авторизации)</param>
+        /// <param name="createDB">Пересоздание БД</param>
+        /// <param name="email">Почта авторизированного пользователя</param>
         public LogInForm(bool isTest = false, bool createDB = false, string email = "qgc.cor@bk.ru")
         {
             UserEmail = email;
@@ -19,9 +28,23 @@ namespace Questionnaire.Forms
             this.createDB = createDB;
             InitializeComponent();
         }
+        /// <summary>
+        /// Проведение теста (да/нет)
+        /// </summary>
         private bool isTest;
+        /// <summary>
+        /// Пересоздание БД (да/нет)
+        /// </summary>
         private bool createDB;
+        /// <summary>
+        /// Почта авторизированного пользователя
+        /// </summary>
         private string UserEmail { get; set; }
+        /// <summary>
+        /// Загрузчик формы авторизации
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void StartForm_Load(object sender, EventArgs e)
         {
             StartDB();
@@ -33,6 +56,9 @@ namespace Questionnaire.Forms
                 Close();
             }
         }
+        /// <summary>
+        /// Метод по пересозданию БД
+        /// </summary>
         private void StartDB()
         {
             if (createDB)
@@ -111,6 +137,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка авторизации
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void InButton_Click(object sender, EventArgs e)
         {
             string login = LoginBox.Text;
@@ -147,6 +178,11 @@ namespace Questionnaire.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка регистрации
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void OnButton_Click(object sender, EventArgs e)
         {
             LogOnForm form = new();
