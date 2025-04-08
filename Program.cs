@@ -23,7 +23,7 @@ namespace Questionnaire
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             //Task.Run(() => { Application.Run(new Test() { Location = new(-10, 700)});});
-            Application.Run(new LogInForm(true, true));
+            Application.Run(new LogInForm());
         }
     }
 }

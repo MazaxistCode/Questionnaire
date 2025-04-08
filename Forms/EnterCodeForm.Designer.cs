@@ -112,7 +112,7 @@
             button1.TabIndex = 30;
             button1.Text = "Ввёл не ту почту";
             button1.UseVisualStyleBackColor = false;
-            button1.Click += Button1_Click;
+            button1.Click += button1_Click;
             // 
             // EnterCodeForm
             // 
