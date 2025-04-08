@@ -10,13 +10,24 @@ using System.Windows.Forms;
 
 namespace Questionnaire.Forms
 {
+    /// <summary>
+    /// Класс формы для ввода кода с почты
+    /// </summary>
     public partial class EnterCodeForm : Form
     {
+        /// <summary>
+        /// Конструктор формы для ввода кода с почты
+        /// </summary>
         public EnterCodeForm()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Загрузчик формы личного кабинета
+        /// </summary>
+        /// <param name="sender">Объект вызывающий событие</param>
+        /// <param name="e">Объект обытия</param>
         private void codeButton_Click(object sender, EventArgs e)
         {
             Close();
